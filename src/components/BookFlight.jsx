@@ -2,13 +2,18 @@ import React, { useState } from "react";
 
 function BookFlight() {
     const [menuOption, setMenuOption] = useState("Book");
+
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [depart, setDepart] = useState("");
     const [returnDate, setReturnDate] = useState("");
     const [ticketNumber, setTicketNumber] = useState("");
     const [lastName, setLastName] = useState("");
+
     const [showCalendar, setShowCalendar] = useState(false);
+    const [showAirportList, setShowAirportList] = useState(false);
+    const [isCurrentAirportInputFrom, setIsCurrentAirportInputFrom] =
+        useState(false);
 
     function handleMenuOptionClicked(option) {
         setMenuOption(option);
@@ -21,9 +26,35 @@ function BookFlight() {
         setTo(temp);
     }
 
+    // AIRPORT LIST FUNCTIONS
+    const [airportRegion, setAirportRegion] = useState("Vietnam");
+
+    function handleAirportOptionClicked(region) {
+        setAirportRegion(region);
+    }
+
+    const vietnamAirports = [
+        "Hanoi (HAN)",
+        "Ho Chi Minh City (SGN)",
+        "Da Nang (DAD)",
+        "Nha Trang (CXR)",
+        "Phu Quoc (PQC)",
+    ];
+    const globalAirports = [
+        "Bangkok (DMK)",
+        "Taichung (RMQ)",
+        "Taipei (TPE)",
+        "Kaohsiung (KHH)",
+    ];
+
+    function handleAirportChosen(airport) {
+        if (isCurrentAirportInputFrom === true) setFrom(airport);
+        else setTo(airport);
+    }
+
     return (
-        <>
-            <div className="shadow-md max-w-6xl m-auto bg-theme-primary rounded-xl border">
+        <div className="relative max-w-6xl m-auto">
+            <div className="shadow-md bg-theme-primary rounded-xl border">
                 <ul className="flex">
                     <li
                         className={`cursor-pointer text-theme-onPrimary font-bold flex-1 text-center text-xl p-4 ${
@@ -57,9 +88,14 @@ function BookFlight() {
                                     <input
                                         type="text"
                                         value={from}
+                                        readOnly
                                         onChange={(e) =>
                                             setFrom(e.target.value)
                                         }
+                                        onFocus={() => {
+                                            setShowAirportList(true);
+                                            setIsCurrentAirportInputFrom(true);
+                                        }}
                                     ></input>
                                 </li>
                                 <button
@@ -75,7 +111,12 @@ function BookFlight() {
                                     <input
                                         type="text"
                                         value={to}
+                                        readOnly
                                         onChange={(e) => setTo(e.target.value)}
+                                        onFocus={() => {
+                                            setShowAirportList(true);
+                                            setIsCurrentAirportInputFrom(false);
+                                        }}
                                     ></input>
                                 </li>
                                 <li className="flex flex-col border grow p-2">
@@ -107,7 +148,9 @@ function BookFlight() {
                         <div className="flex gap-5">
                             <ul className="flex grow gap-2 items-center">
                                 <li className="border flex flex-col grow p-2">
-                                    <label className="text-theme-outline">Ticket number</label>
+                                    <label className="text-theme-outline">
+                                        Ticket number
+                                    </label>
                                     <input
                                         type="text"
                                         value={ticketNumber}
@@ -117,7 +160,9 @@ function BookFlight() {
                                     ></input>
                                 </li>
                                 <li className="border flex flex-col grow p-2">
-                                <label className="text-theme-outline">Ticket number</label>
+                                    <label className="text-theme-outline">
+                                        Ticket number
+                                    </label>
                                     <input
                                         type="text"
                                         value={lastName}
@@ -134,7 +179,75 @@ function BookFlight() {
                     )}
                 </div>
             </div>
-        </>
+
+            {/* AIRPORT LIST -------------------------------------------------------------------------------------------------------------*/}
+            {showAirportList && (
+                <div className="shadow-md rounded-xl w-96 border px-4 py-2 absolute bg-white">
+                    <div className="flex">
+                        <div className="grow"></div>
+                        <span
+                            className="text-2xl cursor-pointer"
+                            onClick={() => setShowAirportList(false)}
+                        >
+                            &times;
+                        </span>
+                    </div>
+                    <ul className="flex">
+                        <li
+                            className={`font-bold grow text-center py-2 cursor-pointer border-b-2 ${
+                                airportRegion === "Vietnam"
+                                    ? "text-theme-primary border-b-theme-primary"
+                                    : "text-theme-outline border-b-white"
+                            }`}
+                            onClick={() =>
+                                handleAirportOptionClicked("Vietnam")
+                            }
+                        >
+                            Vietnam
+                        </li>
+                        <li
+                            className={`font-bold grow text-center py-2 cursor-pointer border-b-2 ${
+                                airportRegion === "Global"
+                                    ? "text-theme-primary border-b-theme-primary"
+                                    : "text-theme-outline border-b-white"
+                            }`}
+                            onClick={() => handleAirportOptionClicked("Global")}
+                        >
+                            Global
+                        </li>
+                    </ul>
+                    {airportRegion === "Vietnam" ? (
+                        <ul className="flex flex-col h-96 py-4">
+                            {vietnamAirports.map((airport) => (
+                                <li
+                                    className="h-12 p-2 rounded-md hover:bg-theme-primaryContainer cursor-pointer"
+                                    onClick={() => {
+                                        handleAirportChosen(airport);
+                                        setShowAirportList(false);
+                                    }}
+                                >
+                                    {airport}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <ul className="flex flex-col h-96 py-4">
+                            {globalAirports.map((airport) => (
+                                <li
+                                    className="h-12 p-2 rounded-md hover:bg-theme-primaryContainer cursor-pointer"
+                                    onClick={() => {
+                                        handleAirportChosen(airport);
+                                        setShowAirportList(false);
+                                    }}
+                                >
+                                    {airport}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            )}
+        </div>
     );
 }
 
