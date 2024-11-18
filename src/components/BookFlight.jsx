@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Calendar from "react-calendar";
+import AirportList from "./AirportList";
+import CalendarPick from "./CalendarPick";
 
 function BookFlight() {
     const [menuOption, setMenuOption] = useState("Book");
@@ -9,11 +12,6 @@ function BookFlight() {
     const [returnDate, setReturnDate] = useState("");
     const [ticketNumber, setTicketNumber] = useState("");
     const [lastName, setLastName] = useState("");
-
-    const [showCalendar, setShowCalendar] = useState(false);
-    const [showAirportList, setShowAirportList] = useState(false);
-    const [isCurrentAirportInputFrom, setIsCurrentAirportInputFrom] =
-        useState(false);
 
     function handleMenuOptionClicked(option) {
         setMenuOption(option);
@@ -27,33 +25,35 @@ function BookFlight() {
     }
 
     // AIRPORT LIST FUNCTIONS
-    const [airportRegion, setAirportRegion] = useState("Vietnam");
-
-    function handleAirportOptionClicked(region) {
-        setAirportRegion(region);
-    }
-
-    const vietnamAirports = [
-        "Hanoi (HAN)",
-        "Ho Chi Minh City (SGN)",
-        "Da Nang (DAD)",
-        "Nha Trang (CXR)",
-        "Phu Quoc (PQC)",
-    ];
-    const globalAirports = [
-        "Bangkok (DMK)",
-        "Taichung (RMQ)",
-        "Taipei (TPE)",
-        "Kaohsiung (KHH)",
-    ];
+    const [showAirportList, setShowAirportList] = useState(false);
+    const [isCurrentAirportInputFrom, setIsCurrentAirportInputFrom] =
+        useState(false);
 
     function handleAirportChosen(airport) {
         if (isCurrentAirportInputFrom === true) setFrom(airport);
         else setTo(airport);
     }
 
+    // CALENDAR FUNCTIONS
+    const [showCalendar, setShowCalendar] = useState(false);
+    const [isCurrentDateInputDepart, setIsCurrentDateInputDepart] =
+        useState(true);
+
+    function handleDateChosen(date) {
+        if (isCurrentDateInputDepart === true) setDepart(date);
+        else setReturnDate(date);
+    }
+
+    function getFormattedDate(date) {
+        if (!(date instanceof Date)) return "";
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
     return (
-        <div className="relative max-w-6xl m-auto">
+        <div className="max-w-6xl m-auto">
             <div className="shadow-md bg-theme-primary rounded-xl border">
                 <ul className="flex">
                     <li
@@ -95,6 +95,7 @@ function BookFlight() {
                                         onFocus={() => {
                                             setShowAirportList(true);
                                             setIsCurrentAirportInputFrom(true);
+                                            setShowCalendar(false);
                                         }}
                                     ></input>
                                 </li>
@@ -116,6 +117,7 @@ function BookFlight() {
                                         onFocus={() => {
                                             setShowAirportList(true);
                                             setIsCurrentAirportInputFrom(false);
+                                            setShowCalendar(false);
                                         }}
                                     ></input>
                                 </li>
@@ -125,8 +127,13 @@ function BookFlight() {
                                     </label>
                                     <input
                                         type="text"
-                                        value={depart}
+                                        value={getFormattedDate(depart)}
                                         readOnly
+                                        onFocus={() => {
+                                            setShowCalendar(true);
+                                            setIsCurrentDateInputDepart(true);
+                                            setShowAirportList(false);
+                                        }}
                                     ></input>
                                 </li>
                                 <li className="flex flex-col border grow p-2">
@@ -135,8 +142,13 @@ function BookFlight() {
                                     </label>
                                     <input
                                         type="text"
-                                        value={returnDate}
+                                        value={getFormattedDate(returnDate)}
                                         readOnly
+                                        onFocus={() => {
+                                            setShowCalendar(true);
+                                            setIsCurrentDateInputDepart(false);
+                                            setShowAirportList(false);
+                                        }}
                                     ></input>
                                 </li>
                             </ul>
@@ -161,7 +173,7 @@ function BookFlight() {
                                 </li>
                                 <li className="border flex flex-col grow p-2">
                                     <label className="text-theme-outline">
-                                        Ticket number
+                                        Last name
                                     </label>
                                     <input
                                         type="text"
@@ -182,70 +194,16 @@ function BookFlight() {
 
             {/* AIRPORT LIST -------------------------------------------------------------------------------------------------------------*/}
             {showAirportList && (
-                <div className="shadow-md rounded-xl w-96 border px-4 py-2 absolute bg-white">
-                    <div className="flex">
-                        <div className="grow"></div>
-                        <span
-                            className="text-2xl cursor-pointer"
-                            onClick={() => setShowAirportList(false)}
-                        >
-                            &times;
-                        </span>
-                    </div>
-                    <ul className="flex">
-                        <li
-                            className={`font-bold grow text-center py-2 cursor-pointer border-b-2 ${
-                                airportRegion === "Vietnam"
-                                    ? "text-theme-primary border-b-theme-primary"
-                                    : "text-theme-outline border-b-white"
-                            }`}
-                            onClick={() =>
-                                handleAirportOptionClicked("Vietnam")
-                            }
-                        >
-                            Vietnam
-                        </li>
-                        <li
-                            className={`font-bold grow text-center py-2 cursor-pointer border-b-2 ${
-                                airportRegion === "Global"
-                                    ? "text-theme-primary border-b-theme-primary"
-                                    : "text-theme-outline border-b-white"
-                            }`}
-                            onClick={() => handleAirportOptionClicked("Global")}
-                        >
-                            Global
-                        </li>
-                    </ul>
-                    {airportRegion === "Vietnam" ? (
-                        <ul className="flex flex-col h-96 py-4">
-                            {vietnamAirports.map((airport) => (
-                                <li
-                                    className="h-12 p-2 rounded-md hover:bg-theme-primaryContainer cursor-pointer"
-                                    onClick={() => {
-                                        handleAirportChosen(airport);
-                                        setShowAirportList(false);
-                                    }}
-                                >
-                                    {airport}
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <ul className="flex flex-col h-96 py-4">
-                            {globalAirports.map((airport) => (
-                                <li
-                                    className="h-12 p-2 rounded-md hover:bg-theme-primaryContainer cursor-pointer"
-                                    onClick={() => {
-                                        handleAirportChosen(airport);
-                                        setShowAirportList(false);
-                                    }}
-                                >
-                                    {airport}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                <AirportList
+                    chooseAirport={handleAirportChosen}
+                    showAirportList={setShowAirportList}
+                ></AirportList>
+            )}
+            
+
+            {/* CALENDAR -------------------------------------------------------------------------------------------------------------*/}
+            {showCalendar && (
+                <CalendarPick chooseDate={handleDateChosen} setShowCalendar={setShowCalendar}/>
             )}
         </div>
     );

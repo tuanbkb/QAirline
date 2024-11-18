@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom calendar styles */
+
+.custom-calendar .react-calendar__navigation {
+    @apply flex justify-center items-center gap-2;
+}
+
+.custom-calendar .react-calendar__navigation button {
+    @apply font-bold rounded px-3 py-2 hover:bg-theme-primaryContainer;
+}
+
+.custom-calendar .react-calendar__tile {
+    @apply w-12 h-12 rounded-xl;
+}
+
+.custom-calendar .react-calendar__tile--active {
+    @apply bg-theme-primary text-white;
+}
+
+.custom-calendar .react-calendar__tile:hover {
+    @apply bg-theme-primaryContainer;
+}

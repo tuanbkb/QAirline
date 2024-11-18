@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookFlight from "../components/BookFlight";
 import Header from "../components/Header";
+import { useEffect } from "react";
 
 function Home() {
+
     return (
         <>
             <Header />
