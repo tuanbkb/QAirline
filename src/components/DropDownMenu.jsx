@@ -6,7 +6,7 @@ function DropDownMenu(props) {
         <div className="absolute rounded-lg shadow-md bg-white w-screen ">
             <div className="flex justify-center gap-20">
                 <div className="flex flex-col">
-                    <h2 className='font-bold'>Baggage info</h2>
+                    <h2 className='font-bold'>Special Services</h2>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
@@ -14,14 +14,22 @@ function DropDownMenu(props) {
                     <a className='p-2 hover:underline' href="">Info</a>
                 </div>
                 <div className="flex flex-col">
+                    <h2 className='font-bold'>Procedure Guide</h2>
+                    <a className='p-2 hover:underline' href="">Info</a>
+                    <a className='p-2 hover:underline' href="">Info</a>
+                    <a className='p-2 hover:underline' href="">Info</a>
+                    <a className='p-2 hover:underline' href="">Info</a>
+                    <a className='p-2 hover:underline' href="">Info</a>
+                </div>
+                {/* <div className="flex flex-col">
                     <h2 className='font-bold'>Plane</h2>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
-                </div>
-                <div className="flex flex-col">
+                </div> */}
+                {/* <div className="flex flex-col">
                     <h2 className='font-bold'>Travel document</h2>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
@@ -36,7 +44,7 @@ function DropDownMenu(props) {
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
                     <a className='p-2 hover:underline' href="">Info</a>
-                </div>
+                </div> */}
             </div>
         </div>
     )

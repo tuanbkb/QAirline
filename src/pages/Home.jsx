@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookFlight from "../components/BookFlight";
 import Header from "../components/Header";
 import { useEffect } from "react";
+import Explore from "./Explore";
 
 function Home() {
 
@@ -14,15 +15,9 @@ function Home() {
                 <Route path="/" element={<BookFlight />} />
                 <Route
                     path="/explore"
-                    element={
-                        <h1 className="text-9xl">
-                            FUCK YEAHH
-                            <h1 className="text-9xl">FUCKYOU</h1>
-                        </h1>
-                    }
+                    element={<Explore />}
                 />
             </Routes>
-            <div className="bg-theme-primaryContainer h-96"></div>
         </>
     );
 }

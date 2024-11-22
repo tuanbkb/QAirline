@@ -89,6 +89,7 @@ function BookFlight() {
                                         type="text"
                                         value={from}
                                         readOnly
+                                        placeholder="Hanoi (HAN)"
                                         onChange={(e) =>
                                             setFrom(e.target.value)
                                         }
@@ -113,6 +114,7 @@ function BookFlight() {
                                         type="text"
                                         value={to}
                                         readOnly
+                                        placeholder="Ho Chi Minh (SGN)"
                                         onChange={(e) => setTo(e.target.value)}
                                         onFocus={() => {
                                             setShowAirportList(true);
@@ -129,6 +131,7 @@ function BookFlight() {
                                         type="text"
                                         value={getFormattedDate(depart)}
                                         readOnly
+                                        placeholder="dd/mm/yyyy"
                                         onFocus={() => {
                                             setShowCalendar(true);
                                             setIsCurrentDateInputDepart(true);
@@ -144,6 +147,7 @@ function BookFlight() {
                                         type="text"
                                         value={getFormattedDate(returnDate)}
                                         readOnly
+                                        placeholder="dd/mm/yyyy"
                                         onFocus={() => {
                                             setShowCalendar(true);
                                             setIsCurrentDateInputDepart(false);

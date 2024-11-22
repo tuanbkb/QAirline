@@ -8,6 +8,7 @@ function CalendarPick({ chooseDate, setShowCalendar }) {
     const onChange = (date) => {
         chooseDate(date);
         setDate(date);
+        setShowCalendar(false);
     };
 
     const isSameMonth = (date1, date2) => {
@@ -18,7 +19,7 @@ function CalendarPick({ chooseDate, setShowCalendar }) {
     };
 
     return (
-        <div className="absolute w-6xl">
+        <div className="absolute w-6xl" >
             <div className="border shadow-md p-2 w-96 bg-white rounded-xl">
                 <div className="flex px-2">
                     <div className="grow"></div>
@@ -33,10 +34,10 @@ function CalendarPick({ chooseDate, setShowCalendar }) {
                     onChange={onChange}
                     value={date}
                     className="custom-calendar"
-                    tileClassName={({ date: tileDate, view }) => {
-                        if (!isSameMonth(date, tileDate)) return "opacity-30";
-                        return "";
-                    }}
+                    // tileClassName={({ date: tileDate, view }) => {
+                    //     if (!isSameMonth(date, tileDate)) return "opacity-30";
+                    //     return "";
+                    // }}
                 />
             </div>
         </div>
