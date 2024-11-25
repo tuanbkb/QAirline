@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FlightCard from "../components/FlightCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 function SearchFlight() {
     const [showModify, setShowModify] = useState(false);
@@ -99,43 +100,51 @@ function SearchFlight() {
                     </button>
                 </div>
             </div>
-            {showModify && (
-                <div className="max-w-6xl m-auto border-2 grid-cols-2 grid px-4 pt-10 pb-4 rounded-xl shadow-md bg-theme-primaryContainer">
-                    <div className="flex flex-col p-2">
-                        <label className="">From</label>
-                        <input
-                            type="text"
-                            className="p-1 border-2 rounded-lg"
-                        ></input>
-                    </div>
-                    <div className="flex flex-col p-2">
-                        <label className="">To</label>
-                        <input
-                            type="text"
-                            className="p-1 border-2 rounded-lg"
-                        ></input>
-                    </div>
-                    <div className="flex flex-col p-2">
-                        <label className="">Depart</label>
-                        <input
-                            type="text"
-                            className="p-1 border-2 rounded-lg"
-                        ></input>
-                    </div>
-                    <div className="flex flex-col p-2">
-                        <label className="">Arrive</label>
-                        <input
-                            type="text"
-                            className="p-1 border-2 rounded-lg"
-                        ></input>
-                    </div>
-                    <div className="col-start-2 flex justify-end p-2">
-                        <button className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed">
-                            Confirm Change
-                        </button>
-                    </div>
-                </div>
-            )}
+            <AnimatePresence>
+                {showModify && (
+                    <motion.div
+                        className="max-w-6xl m-auto border-x-2 border-b-2 grid-cols-2 grid px-4 pt-10 pb-4 rounded-xl shadow-md"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div className="flex flex-col p-2">
+                            <label className="">From</label>
+                            <input
+                                type="text"
+                                className="p-1 border-2 rounded-lg"
+                            ></input>
+                        </div>
+                        <div className="flex flex-col p-2">
+                            <label className="">To</label>
+                            <input
+                                type="text"
+                                className="p-1 border-2 rounded-lg"
+                            ></input>
+                        </div>
+                        <div className="flex flex-col p-2">
+                            <label className="">Depart</label>
+                            <input
+                                type="text"
+                                className="p-1 border-2 rounded-lg"
+                            ></input>
+                        </div>
+                        <div className="flex flex-col p-2">
+                            <label className="">Arrive</label>
+                            <input
+                                type="text"
+                                className="p-1 border-2 rounded-lg"
+                            ></input>
+                        </div>
+                        <div className="col-start-2 flex justify-end p-2">
+                            <button className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed">
+                                Confirm Change
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className="h-4"></div>
             <div className="mt-10">
                 {flights.map((flight) => (
