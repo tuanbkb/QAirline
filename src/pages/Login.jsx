@@ -77,12 +77,12 @@ function Login() {
                             <input type="checkbox"></input>
                             <span className="pl-2">Remember me</span>
                         </div>
-                        <a
+                        <Link
                             className="text-theme-primary italic underline hover:text-theme-tertiary"
-                            href=""
+                            to="/forgotpassword"
                         >
                             Forget your password?
-                        </a>
+                        </Link>
                     </div>
                     <button
                         className="bg-theme-primary text-theme-onPrimary font-bold text-center w-96 p-4 rounded-lg my-2"

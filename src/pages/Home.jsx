@@ -3,9 +3,9 @@ import BookFlight from "../components/BookFlight";
 import Header from "../components/Header";
 import { useEffect } from "react";
 import Explore from "./Explore";
+import SearchFlight from "./SearchFlight";
 
 function Home() {
-
     return (
         <>
             <Header />
@@ -13,10 +13,8 @@ function Home() {
             {/* <BookFlight /> */}
             <Routes>
                 <Route path="/" element={<BookFlight />} />
-                <Route
-                    path="/explore"
-                    element={<Explore />}
-                />
+                <Route path="/explore" element={<Explore />} />
+                <Route path="/searchflight" element={<SearchFlight />} />
             </Routes>
         </>
     );
