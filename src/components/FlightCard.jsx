@@ -1,32 +1,34 @@
+import {formatTime, calculateDuration} from "../utils/TimeFormat";
+
 function FlightCard({ flight }) {
-    function formatTime(time) {
-        const t = new Date(time);
-        var h = t.getHours();
-        var min = t.getMinutes();
+    // function formatTime(time) {
+    //     const t = new Date(time);
+    //     var h = t.getHours();
+    //     var min = t.getMinutes();
 
-        var res = h + ":";
-        res += min < 10 ? "0" + min : min;
-        return res;
-    }
+    //     var res = h + ":";
+    //     res += min < 10 ? "0" + min : min;
+    //     return res;
+    // }
 
-    function formatDuration(duration) {
-        const durationInMins = Math.floor(duration / (1000 * 60));
-        const h = Math.floor(durationInMins / 60);
-        const m = Math.floor(durationInMins - h * 60);
+    // function formatDuration(duration) {
+    //     const durationInMins = Math.floor(duration / (1000 * 60));
+    //     const h = Math.floor(durationInMins / 60);
+    //     const m = Math.floor(durationInMins - h * 60);
 
-        var res = "";
-        res += h > 10 ? h : "0" + h;
-        res += ":";
-        res += m > 10 ? m : "0" + m;
-        return res;
-    }
+    //     var res = "";
+    //     res += h > 10 ? h : "0" + h;
+    //     res += ":";
+    //     res += m > 10 ? m : "0" + m;
+    //     return res;
+    // }
 
-    function calculateDuration(start, end) {
-        const startTime = new Date(start);
-        const endTime = new Date(end);
-        const duration = endTime - startTime;
-        return formatDuration(duration);
-    }
+    // function calculateDuration(start, end) {
+    //     const startTime = new Date(start);
+    //     const endTime = new Date(end);
+    //     const duration = endTime - startTime;
+    //     return formatDuration(duration);
+    // }
 
     return (
         <div className="border-2 rounded-xl shadow-md w-full my-4 flex">
