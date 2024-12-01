@@ -54,7 +54,7 @@ function SignUp() {
                         <img
                             className="m-auto cursor-pointer"
                             src={logo}
-                            onClick={handleImageClick}
+                            // onClick={handleImageClick}
                         ></img>
                     </div>
                     <h2 className="pb-4 text-center text-3xl font-bold">

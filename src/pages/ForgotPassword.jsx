@@ -33,7 +33,7 @@ function ForgotPassword() {
                         <img
                             className="m-auto cursor-pointer"
                             src={logo}
-                            onClick={() => navigate("/")}
+                            // onClick={() => navigate("/")}
                         ></img>
                     </div>
                     {!submitted ? (<>
