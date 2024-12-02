@@ -24,6 +24,10 @@ const clientNoInterceptor = axios.create({
 
 apiClient.interceptors.response.use(
   async (response) => {
+    if (response.data.code === 401) {
+      console.log("Handling invalid token");
+      window.location.href = "/login";
+    }
     return response;
   },
   async (error) => {
@@ -55,8 +59,7 @@ apiClient.interceptors.response.use(
         console.error("Refresh token expired. Please log in again.");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        const navigate = useNavigate();
-        navigate("/login", { replace: true });
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
@@ -156,27 +159,35 @@ export const fetchAirports = async () => {
   }
 };
 
-export const fetchNewsApi = async () => {
+export const getAllNews = async () => {
   try {
-    const response = await apiClient.get("/api/admin/v1/news/filterNews", {
-      params: {
-        folder: "Test",
-      },
-    });
-    console.log(response);
-    return response.data.results;
+    const response = await apiClient.get("/api/customer/v1/news/filterNews");
+    return response.data;
   } catch (error) {
-    console.error("Error fetching news data:", error);
     throw error;
   }
 };
+
+export const getNewsById = async (newsId) => {
+  try {
+    const response = await apiClient.get("/api/customer/v1/news", {
+      params: {
+        newsId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// export const getNewsById = async () =>
 export const fetchMockNews = async () => {
   try {
     const response = await axios.get("/newsData.json");
     console.log(response);
     return response.data;
   } catch (error) {
-    console.error("Error fetching news data:", error);
     throw error;
   }
 };
@@ -184,16 +195,14 @@ export const fetchMockNews = async () => {
 export const loginApi = async (username, password) => {
   try {
     const response = await clientNoInterceptor.post(
-      "/api/admin/v1/authenticate",
+      "/api/customer/v1/authenticate",
       {
         username,
         password,
       }
     );
-    console.log(response);
     return response.data;
   } catch (error) {
-    console.error("Error logging in:", error);
     throw error;
   }
 };
@@ -203,4 +212,21 @@ export const refreshToken = async () => {
     refreshToken: localStorage.getItem("refreshToken"),
   });
   return response.data; // { accessToken }
+};
+
+export const registerApi = async (username, password, email) => {
+  try {
+    const response = await clientNoInterceptor.post(
+      "/api/customer/v1/register",
+      {
+        username,
+        password,
+        email,
+      }
+    );
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };

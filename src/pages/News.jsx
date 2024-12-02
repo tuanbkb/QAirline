@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMockNews, fetchNewsApi } from "../api/api";
+import { fetchMockNews, getAllNews } from "../api/api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewsPage = () => {
   const [newsList, setNewsList] = useState([]);
@@ -11,8 +13,12 @@ const NewsPage = () => {
   }, []);
 
   const fetchNews = async () => {
-    const response = await fetchMockNews(); // Fetching from fake API
-    setNewsList(response);
+    try {
+      const response = await getAllNews(); // Fetching from fake API
+      setNewsList(response.results);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   const handleSeeMore = (id) => {
@@ -46,6 +52,7 @@ const NewsPage = () => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };

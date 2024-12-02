@@ -38,7 +38,7 @@ function Header() {
                 setMenuType("info");
               }}
             >
-              Info
+              <Link to="/info">Travel Information</Link>
             </li>
             <li
               className="p-4 hover:text-theme-primary cursor-pointer font-bold"
@@ -47,7 +47,7 @@ function Header() {
                 setMenuType("contact");
               }}
             >
-              <Link to="/news">News & Offers</Link>
+              <Link to="/news">News and Offers</Link>
             </li>
           </ul>
         </nav>
