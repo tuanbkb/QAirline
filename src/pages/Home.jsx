@@ -3,6 +3,8 @@ import BookFlight from "../components/BookFlight";
 import Header from "../components/Header";
 import { useEffect } from "react";
 import Explore from "./Explore";
+import NewsDetailsPage from "./NewsDetailsPage";
+import NewsPage from "./News";
 import SearchFlight from "./SearchFlight";
 import ShoppingCart from "./ShoppingCart";
 import FillDetails from "./FillDetails";
@@ -21,6 +23,8 @@ function Home() {
                 <Route path="/shoppingcart" element={<ShoppingCart />} />
                 <Route path="/filldetails" element={<FillDetails />} />
                 <Route path="/result" element={<BookingResult />} />
+                <Route path="/news" element={<NewsPage />} />
+                <Route path="/news/:id" element={<NewsDetailsPage />} />
             </Routes>
         </>
     );
