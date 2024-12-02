@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import AirportList from "./AirportList";
 import CalendarPick from "./CalendarPick";
+import { useNavigate } from "react-router-dom";
 
 function BookFlight() {
+    const navigate = useNavigate();
     const [menuOption, setMenuOption] = useState("Book");
 
     const [from, setFrom] = useState("");
@@ -139,7 +141,7 @@ function BookFlight() {
                                         }}
                                     ></input>
                                 </li>
-                                <li className="flex flex-col border grow p-2">
+                                {/* <li className="flex flex-col border grow p-2">
                                     <label className="text-theme-outline">
                                         Return
                                     </label>
@@ -154,9 +156,12 @@ function BookFlight() {
                                             setShowAirportList(false);
                                         }}
                                     ></input>
-                                </li>
+                                </li> */}
                             </ul>
-                            <button className="bg-theme-secondary text-theme-onSecondary font-bold rounded-xl p-4 hover:bg-theme-onSecondaryFixed">
+                            <button
+                                className="bg-theme-secondary text-theme-onSecondary font-bold rounded-xl p-4 hover:bg-theme-onSecondaryFixed"
+                                onClick={() => navigate("/searchflight")}
+                            >
                                 Search Flight
                             </button>
                         </div>
@@ -203,11 +208,13 @@ function BookFlight() {
                     showAirportList={setShowAirportList}
                 ></AirportList>
             )}
-            
 
             {/* CALENDAR -------------------------------------------------------------------------------------------------------------*/}
             {showCalendar && (
-                <CalendarPick chooseDate={handleDateChosen} setShowCalendar={setShowCalendar}/>
+                <CalendarPick
+                    chooseDate={handleDateChosen}
+                    setShowCalendar={setShowCalendar}
+                />
             )}
         </div>
     );
