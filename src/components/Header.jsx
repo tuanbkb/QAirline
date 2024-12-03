@@ -1,4 +1,4 @@
-import logo from "../assets/image/logo.png";
+import logo from "../assets/image/QAirlineLogoFinal.png";
 import DropDownMenu from "./DropDownMenu";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ function Header() {
     <>
       <header className="flex justify-between max-w-6xl m-auto pt-4">
         <img
-          className="cursor-pointer"
+          className="cursor-pointer h-[60px]"
           src={logo}
           onClick={handleImageClick}
         ></img>

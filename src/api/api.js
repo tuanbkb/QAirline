@@ -105,50 +105,6 @@ export const getFlightsData = async () => {
   }
 };
 
-export const fetchAircrafts = async () => {
-  try {
-    const response = await apiClient.get("/api/admin/v1/planes");
-    return response.data.results;
-  } catch (error) {
-    console.error("Error fetching aircraft data:", error);
-    throw error;
-  }
-};
-
-export const createAircraft = async (data) => {
-  try {
-    const response = await apiClient.post("/api/admin/v1/planes", data);
-    return response.data.message;
-  } catch (error) {
-    console.error("Error creating aircraft", error);
-    throw error;
-  }
-};
-
-export const updateAircraft = async (data) => {
-  try {
-    const response = await apiClient.put("/api/admin/v1/planes", data);
-    return response.data.message;
-  } catch (error) {
-    console.error("Error updating aircraft", error);
-    throw error;
-  }
-};
-
-export const deleteAircraft = async (id) => {
-  try {
-    const response = await apiClient.delete("/api/admin/v1/planes", {
-      params: {
-        id: id,
-      },
-    });
-    return response.data.message;
-  } catch (error) {
-    console.error("Error deleting aircraft", error);
-    throw error;
-  }
-};
-
 export const fetchAirports = async () => {
   try {
     const response = await apiClient.get("/api/admin/v1/airports");
@@ -173,6 +129,19 @@ export const getNewsById = async (newsId) => {
     const response = await apiClient.get("/api/customer/v1/news", {
       params: {
         newsId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getNewsByFolder = async (folder) => {
+  try {
+    const response = await apiClient.get("/api/customer/v1/news/filterNews", {
+      params: {
+        folder,
       },
     });
     return response.data;

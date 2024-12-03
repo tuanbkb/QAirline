@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchMockNews, getAllNews } from "../api/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RectangleCard from "../components/RectangleCard";
 
 const NewsPage = () => {
   const [newsList, setNewsList] = useState([]);
@@ -27,31 +28,20 @@ const NewsPage = () => {
 
   return (
     <div className="flex justify-center mt-5">
-      <div className="w-[70vw] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {newsList.map((news) => (
-          <div
-            key={news.id}
-            className="flex flex-col justify-between bg-white shadow-md rounded-lg overflow-hidden"
-          >
-            <div className="p-4 flex-grow">
-              <h3 className="text-lg font-semibold text-gray-800">
-                {news.title}
-              </h3>
-              <p className="mt-2 text-gray-600 text-sm">
-                {news.content.slice(0, 100)}...
-              </p>
-            </div>
-            <div className="flex justify-end p-2">
-              <button
-                className="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-blue-50"
-                onClick={() => handleSeeMore(news.id)}
-              >
-                See More
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="w-[70vw]">
+        <h1 className="mt-4 text-2xl text-grey-800">NEWS & OFFERS</h1>
+        <div className=" grid grid-cols-2 gap-5 mt-5">
+          {newsList.map((news) => (
+            <RectangleCard
+              key={news.id}
+              name={news.title}
+              imageUrl={news.imageUrl}
+              onCardClick={() => handleSeeMore(news.id)}
+            />
+          ))}
+        </div>
       </div>
+
       <ToastContainer />
     </div>
   );

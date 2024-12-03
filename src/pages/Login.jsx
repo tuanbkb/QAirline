@@ -1,6 +1,6 @@
 import { useState } from "react";
 import backgroundImage from "../assets/image/background.jpg";
-import logo from "../assets/image/logo.png";
+import logo from "../assets/image/QAirlineLogoFinal.png";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApi } from "../api/api";
 
@@ -48,7 +48,7 @@ function Login() {
         <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
           <div className="pb-8 w-full">
             <img
-              className="m-auto cursor-pointer"
+              className="m-auto cursor-pointer h-[70px]"
               src={logo}
               // onClick={handleImageClick}
             ></img>
