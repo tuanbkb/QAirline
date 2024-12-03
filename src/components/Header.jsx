@@ -41,7 +41,7 @@ function Header() {
     <>
       <header className="flex justify-between max-w-6xl m-auto pt-4">
         <img
-          className="cursor-pointer"
+          className="cursor-pointer h-[4rem]"
           src={logo}
           onClick={handleImageClick}
         ></img>
