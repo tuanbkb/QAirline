@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import AirportList from "./AirportList";
 import CalendarPick from "./CalendarPick";
 import { useNavigate } from "react-router-dom";
+import { fetchAllCities } from "../api/api";
 
 function BookFlight() {
+    // //NETWORK
+    // const [cities, setCities] = useState([]);
+    // const getAllCities = async () => {
+    //     const cities = await fetchAllCities();
+    //     setCities(cities);
+    // };
+
+    // useEffect(() => {
+    //     getAllCities();
+    // }, []);
+
+
+
+
+    //UI LOGIC
     const navigate = useNavigate();
     const [menuOption, setMenuOption] = useState("Book");
 
@@ -89,9 +105,9 @@ function BookFlight() {
                                     </label>
                                     <input
                                         type="text"
-                                        value={from}
+                                        value={from.cityName}
                                         readOnly
-                                        placeholder="Hanoi (HAN)"
+                                        placeholder="Hanoi"
                                         onChange={(e) =>
                                             setFrom(e.target.value)
                                         }
@@ -114,9 +130,9 @@ function BookFlight() {
                                     </label>
                                     <input
                                         type="text"
-                                        value={to}
+                                        value={to.cityName}
                                         readOnly
-                                        placeholder="Ho Chi Minh (SGN)"
+                                        placeholder="Saigon"
                                         onChange={(e) => setTo(e.target.value)}
                                         onFocus={() => {
                                             setShowAirportList(true);
