@@ -6,9 +6,9 @@ import { loginApi } from "../api/api";
 
 function Login() {
   const navigate = useNavigate();
-  const handleImageClick = () => {
-    navigate("/");
-  };
+  // const handleImageClick = () => {
+  //   navigate("/");
+  // };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ function Login() {
   const [loginError, setLoginError] = useState("");
 
   // TODO: Implement this motherfucker
-  const handleLoginButtonClicked = async () => {
+  const handleLoginButtonClicked = async (e) => {
     setEmailError("");
     setPasswordError("");
     setLoginError("");
@@ -29,13 +29,17 @@ function Login() {
     }
 
     // TODO: Login user
+    // setLoginError("No user. Are you dumb?");
     try {
       const { results } = await loginApi(email, password);
+      console.log("Logged in");
+      console.log(`access token: ${results.jwtToken}`);
       localStorage.setItem("accessToken", results.jwtToken);
       localStorage.setItem("refreshToken", results.refreshToken);
       navigate("/");
-    } catch (err) {
-      setLoginError(err.response.data.message);
+    } catch (e) {
+      console.log("Error: " + e);
+      setLoginError("Invalid user!");
     }
   };
 
@@ -48,18 +52,18 @@ function Login() {
         <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
           <div className="pb-8 w-full">
             <img
-              className="m-auto cursor-pointer h-[70px]"
+              className="m-auto cursor-pointer"
               src={logo}
               // onClick={handleImageClick}
             ></img>
           </div>
           <h2 className="pb-4 text-center text-3xl font-bold">Login</h2>
           <div className="py-2 flex flex-col">
-            <div className="py-2">Email</div>
+            <div className="py-2">Username or Email</div>
             <input
               className="p-2 w-96 border-solid border-gray-500 border rounded-lg"
               type="text"
-              placeholder="Enter your email"
+              placeholder="Enter your username/email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></input>

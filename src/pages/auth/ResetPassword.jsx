@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import backgroundImage from "../assets/image/background.jpg";
-import logo from "../assets/image/logo.png";
+import backgroundImage from "../../assets/image/background.jpg";
+import logo from "../../assets/image/logo.png";
 import { useState } from "react";
 
 function ResetPassword() {
