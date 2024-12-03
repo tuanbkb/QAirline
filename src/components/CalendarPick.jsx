@@ -30,6 +30,7 @@ function CalendarPick({ chooseDate, setShowCalendar }) {
                         &times;
                     </span>
                 </div>
+                <h2 className="text-theme-primary font-bold text-xl text-center">CHOOSE DATE</h2>
                 <Calendar
                     onChange={onChange}
                     value={date}

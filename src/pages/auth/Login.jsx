@@ -31,7 +31,6 @@ function Login() {
         }
 
         // TODO: Login user
-        // setLoginError("No user. Are you dumb?");
         try {
             const { results } = await loginApi(email, password);
             console.log("Logged in");

@@ -234,3 +234,14 @@ export const signUpApi = async (username, password, email) => {
     throw error;
   }
 }
+
+export const fetchAllCities = async () => {
+  try {
+    const response = await apiClient.get("/api/customer/v1/airports/cities");
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching cities data:", error);
+    throw error;
+  }
+}
