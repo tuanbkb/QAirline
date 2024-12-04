@@ -7,6 +7,7 @@ function ProfileMenu() {
     const handleSignOutClicked = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("username");
         window.location.reload();
     };
 

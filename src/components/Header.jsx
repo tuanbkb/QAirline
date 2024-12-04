@@ -22,8 +22,13 @@ function Header() {
 
   const [username, setUsername] = useState("");
   const getUserName = async () => {
-    const userData = await fetchUserData();
-    setUsername(userData.username);
+    if (localStorage.getItem("username") === null) {
+      const userData = await fetchUserData();
+      setUsername(userData.username);
+      localStorage.setItem("username", userData.username);
+    } else {
+      setUsername(localStorage.getItem("username"));
+    }
   };
 
   useEffect(() => {
