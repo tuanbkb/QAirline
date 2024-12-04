@@ -4,7 +4,7 @@ export default function BackButton() {
   const navigate = useNavigate();
   return (
     <button
-      onClick={() => navigate(-1)}
+      onClick={() => navigate("/explore")}
       className="text-theme-primary text-xl rounded pr-4 pl-2 py-2 flex items-center justify-start hover:bg-blue-50 gap-1"
     >
       <svg
