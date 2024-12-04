@@ -1,63 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FlightCard from "../components/FlightCard";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import { formatDate, getEndOfDay, getStartOfDay } from "../utils/TimeFormat";
+import { fetchFilteredFlights } from "../api/api";
 
 function SearchFlight() {
     const [showModify, setShowModify] = useState(false);
 
     // const [flights, setFlights] = useState([]);
+    const location = useLocation();
+    const states = location.state;
 
     // MOCK DATA
-    const [flights, setFlights] = useState([
-        {
-            id: "flight_1",
-            start_airport: {
-                id: "airport_1",
-                name: "airport_name_1",
-                city: "The airport's city",
-                country: "The airport's country",
-                location: "1, A Street, A District, A City, A Country",
-            },
-            end_airport: {
-                id: "airport_2",
-                name: "airport_name_2",
-                city: "The airport's city",
-                country: "The airport's country",
-                location: "5, B Street, B District, B City, B Country",
-            },
-            start_time: "2024-10-30T12:00:00Z",
-            end_time: "2024-10-30T14:00:00Z",
-            is_available: "true",
-            capacity: 100,
-            remaining: 99,
-            normal_price: 100,
-            business_price: 200,
-        },
-        {
-            id: "flight_2",
-            start_airport: {
-                id: "airport_1",
-                name: "airport_name_1",
-                city: "The airport's city",
-                country: "The airport's country",
-                location: "1, A Street, A District, A City, A Country",
-            },
-            end_airport: {
-                id: "airport_2",
-                name: "airport_name_2",
-                city: "The airport's city",
-                country: "The airport's country",
-                location: "5, B Street, B District, B City, B Country",
-            },
-            start_time: "2024-10-30T12:00:00Z",
-            end_time: "2024-10-30T14:00:00Z",
-            is_available: "true",
-            capacity: 100,
-            remaining: 99,
-            normal_price: 100,
-            business_price: 200,
-        },
-    ]);
+    const [flights, setFlights] = useState([]);
+
+    //GET REAL DATA
+    const fromCityCode = states.from.cityCode;
+    const fromCityName = states.from.cityName;
+    const toCityCode = states.to.cityCode;
+    const toCityName = states.to.cityName;
+    const departDate = states.depart;
+
+    console.log(fromCityCode + " " + fromCityName + " " + toCityCode + " " + toCityName + " " + getStartOfDay(departDate) + " " + getEndOfDay(departDate));
+
+    const getFlights = async () => {
+        const flightsList = await fetchFilteredFlights({
+            departureCity: states.from.id,
+            destinationCity: states.to.id,
+            departureTimeStart: getStartOfDay(states.depart),
+            departureTimeEnd: getEndOfDay(states.depart),
+        });
+        setFlights(flightsList);
+    }
+
+    useEffect(() => {
+        getFlights();
+    }, []);
 
     return (
         <div className="max-w-6xl m-auto">
@@ -68,25 +47,20 @@ function SearchFlight() {
             <div className="border-2 shadow-md flex p-4 rounded-xl">
                 <div className="flex grow justify-center px-2">
                     <div className="flex flex-col items-center ">
-                        <h3 className="font-bold text-xl">HAN</h3>
-                        <h4 className="">Hanoi</h4>
+                        <h3 className="font-bold text-xl">{fromCityCode}</h3>
+                        <h4 className="">{fromCityName}</h4>
                     </div>
                     <span className="mx-2 font-bold">{"--------->"}</span>
                     <div className="flex flex-col items-center">
-                        <h3 className="font-bold text-xl">SGN</h3>
-                        <h4 className="">TP Ho Chi Minh</h4>
+                        <h3 className="font-bold text-xl">{toCityCode}</h3>
+                        <h4 className="">{toCityName}</h4>
                     </div>
                 </div>
                 <div className="border"></div>
                 <div className="flex grow justify-center px-2">
                     <div className="flex flex-col items-center">
                         <h3 className="font-bold text-xl">Depart</h3>
-                        <h4 className="">2024-10-30</h4>
-                    </div>
-                    <div className="w-4"></div>
-                    <div className="flex flex-col items-center">
-                        <h3 className="font-bold text-xl">Arrive</h3>
-                        <h4 className="">2024-10-30</h4>
+                        <h4 className="">{formatDate(departDate)}</h4>
                     </div>
                 </div>
             </div>

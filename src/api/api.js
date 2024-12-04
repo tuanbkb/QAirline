@@ -183,7 +183,7 @@ export const getNewsById = async (newsId) => {
 
 export const getNewsByFolder = async (folder) => {
   try {
-    const response = await apiClient.get("/api/customer/v1/news/filterNews", {
+    const response = await apiClient.get("/api/customer/v1/news/filter_news", {
       params: {
         folder,
       },
@@ -230,7 +230,7 @@ export const refreshToken = async () => {
 // CHO NAY TUAN VIET :P
 export const fetchUserData = async () => {
   try {
-    const response = await apiClient.get("/api/customer/v1/currentUser");
+    const response = await apiClient.get("/api/customer/v1/current_user");
     console.log(response);
     return response.data.results;
   } catch (error) {
@@ -253,6 +253,16 @@ export const signUpApi = async (username, password, email) => {
     return response.data;
   } catch (error) {
     console.error("Error signing up:", error);
+    throw error;
+  }
+};
+
+export const fetchFilteredFlights = async (data) => {
+  try {
+    const response = await apiClient.get("/api/customer/v1/flights/filter", data);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching filtered flights data:", error);
     throw error;
   }
 };

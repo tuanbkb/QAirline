@@ -1,6 +1,6 @@
 function FillDetailsTextField({ label, value, placeholder, onChange }) {
     return (
-        <div className="relative mx-2 my-6">
+        <div className="relative">
             <input
                 className="p-2 border-2 rounded-lg block w-full"
                 type="text"

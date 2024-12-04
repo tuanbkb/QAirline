@@ -43,3 +43,23 @@ export function formatDate(date) {
     res += "/" + year;
     return res;
 }
+
+export function getFormattedDate(date) {
+    if (!(date instanceof Date)) return "";
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+export function getStartOfDay(date) {
+    if (!(date instanceof Date)) return "";
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
+export function getEndOfDay(date) {
+    if (!(date instanceof Date)) return "";
+    date.setHours(23, 59, 59, 999);
+    return date;
+}

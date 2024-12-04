@@ -21,7 +21,7 @@ function Explore() {
 
   return (
     <div className="max-w-6xl m-auto mb-2">
-      <h1 className="text-theme-onPrimaryContainer mt-4 text-grey-800 text-2xl">
+      <h1 className="w-full text-center font-bold text-3xl text-theme-primary">
         EXPLORE
       </h1>
       <div className="grid grid-cols-3 mt-5 gap-2">

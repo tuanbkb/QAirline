@@ -4,6 +4,7 @@ import AirportList from "./AirportList";
 import CalendarPick from "./CalendarPick";
 import { useNavigate } from "react-router-dom";
 import { fetchAllCities } from "../api/api";
+import { getFormattedDate } from "../utils/TimeFormat";
 
 function BookFlight() {
     // //NETWORK
@@ -17,9 +18,6 @@ function BookFlight() {
     //     getAllCities();
     // }, []);
 
-
-
-
     //UI LOGIC
     const navigate = useNavigate();
     const [menuOption, setMenuOption] = useState("Book");
@@ -27,7 +25,8 @@ function BookFlight() {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [depart, setDepart] = useState("");
-    const [returnDate, setReturnDate] = useState("");
+    const [bookingError, setBookingError] = useState("");
+    // const [returnDate, setReturnDate] = useState("");
     const [ticketNumber, setTicketNumber] = useState("");
     const [lastName, setLastName] = useState("");
 
@@ -62,13 +61,33 @@ function BookFlight() {
         else setReturnDate(date);
     }
 
-    function getFormattedDate(date) {
-        if (!(date instanceof Date)) return "";
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    }
+    // function getFormattedDate(date) {
+    //     if (!(date instanceof Date)) return "";
+    //     let day = date.getDate();
+    //     let month = date.getMonth() + 1;
+    //     let year = date.getFullYear();
+    //     return `${day}/${month}/${year}`;
+    // }
+
+    // BUTTON FUNCTIONS
+    const onSearchFlightButtonClicked = () => {
+        setBookingError("");
+        let error = false;
+        if (depart === "") {
+            setBookingError("Departing date can't be blank");
+            error = true;
+        }
+        if (to === "") {
+            setBookingError("Destination city can't be blank");
+            error = true;
+        }
+        if (from === "") {
+            setBookingError("Destination city can't be blank");
+            error = true;
+        }
+
+        if (!error) navigate("/searchflight", { state: { from, to, depart } });
+    };
 
     return (
         <div className="max-w-6xl m-auto">
@@ -99,7 +118,7 @@ function BookFlight() {
                     {menuOption === "Book" ? (
                         <div className="flex gap-5">
                             <ul className="flex grow gap-2 items-center">
-                                <li className="flex flex-col border grow p-2">
+                                <li className="flex flex-col border p-2 grow">
                                     <label className="text-theme-outline">
                                         From
                                     </label>
@@ -124,7 +143,7 @@ function BookFlight() {
                                 >
                                     &#8644;
                                 </button>
-                                <li className="flex flex-col border grow p-2">
+                                <li className="flex flex-col grow border p-2">
                                     <label className="text-theme-outline">
                                         To
                                     </label>
@@ -141,7 +160,7 @@ function BookFlight() {
                                         }}
                                     ></input>
                                 </li>
-                                <li className="flex flex-col border grow p-2">
+                                <li className="flex flex-col grow border p-2">
                                     <label className="text-theme-outline">
                                         Depart
                                     </label>
@@ -176,7 +195,7 @@ function BookFlight() {
                             </ul>
                             <button
                                 className="bg-theme-secondary text-theme-onSecondary font-bold rounded-xl p-4 hover:bg-theme-onSecondaryFixed"
-                                onClick={() => navigate("/searchflight")}
+                                onClick={onSearchFlightButtonClicked}
                             >
                                 Search Flight
                             </button>
@@ -214,6 +233,7 @@ function BookFlight() {
                             </button>
                         </div>
                     )}
+                    <span className="text-theme-error">{bookingError}</span>
                 </div>
             </div>
 

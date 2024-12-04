@@ -13,6 +13,7 @@ import InformationPage from "./Information/InformationPage";
 import InformationCategory from "./Information/InformationCategory/InformationCategory";
 import InformationDetails from "./Information/InformationCategory/InformationDetails/InformationDetails";
 import DestinationDetails from "./Destinations/DestinationDetails";
+import Checkout from "./Checkout";
 
 function Home() {
   return (
@@ -28,6 +29,7 @@ function Home() {
         <Route path="/searchflight" element={<SearchFlight />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
         <Route path="/filldetails" element={<FillDetails />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/info" element={<InformationPage />} />
         <Route path="/info/:folder" element={<InformationCategory />} />
         <Route path="/info/:folder/:id" element={<InformationDetails />} />
