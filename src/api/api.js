@@ -257,9 +257,29 @@ export const signUpApi = async (username, password, email) => {
   }
 };
 
-export const fetchFilteredFlights = async (data) => {
+export const putUserProfile = async (data) => {
   try {
-    const response = await apiClient.get("/api/customer/v1/flights/filter", data);
+    const response = await apiClient.put("/api/customer/v1/edit", data);
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error posting user profile:", error);
+    throw error;
+  }
+};
+
+export const fetchFilteredFlights = async (from, to, start, end) => {
+  try {
+    const data = {
+      departureCity: from,
+      arrivalCity: to,
+      departureTimeStart: start,
+      departureTimeEnd: end,
+    }
+    const response = await apiClient.get("/api/customer/v1/flights/filter", {
+      params: data
+    });
+    console.log("Filtered flights data:", response);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching filtered flights data:", error);

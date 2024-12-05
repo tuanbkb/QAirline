@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 function ProfileMenu() {
+    const navigate = useNavigate();
     const handleBookingHistoryClicked = () => {};
-    const handleProfileClicked = () => {};
+    const handleProfileClicked = () => {
+        navigate("/profile");
+    };
     const handleSignOutClicked = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");

@@ -58,8 +58,6 @@ function Checkout() {
             <h1 className="w-full text-center font-bold text-3xl text-theme-primary">
                 CONFIRM YOUR ORDER
             </h1>
-            <ShoppingCartItem flight={flights[0]} />
-            <ShoppingCartItem flight={flights[1]} />
 
         </div>
     );

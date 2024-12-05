@@ -3,40 +3,11 @@ import FillDetailsTextField from "../components/FillDetailsTextField";
 import ShoppingCartItem from "../components/ShoppingCardItem";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../api/api";
+import { getFormattedDate } from "../utils/TimeFormat";
 
 function FillDetails() {
     const navigate = useNavigate();
 
-    // const getUserData = async () => {
-    //     const userData = await fetchUserData();
-    // }
-    // useEffect(() => {
-
-    // }, [])
-    // const [flight, setFlight] = useState({
-    //     id: "flight_1",
-    //     start_airport: {
-    //         id: "airport_1",
-    //         name: "airport_name_1",
-    //         city: "The airport's city",
-    //         country: "The airport's country",
-    //         location: "1, A Street, A District, A City, A Country",
-    //     },
-    //     end_airport: {
-    //         id: "airport_2",
-    //         name: "airport_name_2",
-    //         city: "The airport's city",
-    //         country: "The airport's country",
-    //         location: "5, B Street, B District, B City, B Country",
-    //     },
-    //     start_time: "2024-10-30T12:00:00Z",
-    //     end_time: "2024-10-30T14:00:00Z",
-    //     is_available: "true",
-    //     capacity: 100,
-    //     remaining: 99,
-    //     normal_price: 100,
-    //     business_price: 200,
-    // });
     const [name, setName] = useState("");
     const [dob, setDob] = useState("");
     const [address, setAddress] = useState("");
@@ -47,6 +18,19 @@ function FillDetails() {
     const [addressError, setAddressError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [phoneError, setPhoneError] = useState("");
+
+    const getUserData = async () => {
+        const userData = await fetchUserData();
+        setName(userData.firstName == null ? "" : userData.firstName);
+        setDob(userData.dateOfBirth == null ? "" : getFormattedDate(new Date(userData.dateOfBirth)));
+        setEmail(userData.email == null ? "" : userData.email);
+        setAddress(userData.address == null ? "" : userData.address);
+        setPhone(userData.phone == null ? "" : userData.phone);
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, [])
 
     const handleToCheckoutButtonClicked = () => {
         setNameError("");
@@ -94,7 +78,6 @@ function FillDetails() {
                 ENTER PASSENGER INFORMATION
             </h1>
             <div className="h-10"></div>
-            {/* <ShoppingCartItem flight={flight} /> */}
             <div className="w-full rounded-xl shadow-md border-2 p-4">
                 <h2 className="text-center font-bold p-2">
                     Your personal information

@@ -22,17 +22,23 @@ function SearchFlight() {
     const toCityName = states.to.cityName;
     const departDate = states.depart;
 
-    console.log(fromCityCode + " " + fromCityName + " " + toCityCode + " " + toCityName + " " + getStartOfDay(departDate) + " " + getEndOfDay(departDate));
+    // console.log(fromCityCode + " " + fromCityName + " " + toCityCode + " " + toCityName + " " + getStartOfDay(departDate) + " " + getEndOfDay(departDate));
+    console.log(
+        states.from.id,
+        states.to.id,
+        getStartOfDay(states.depart),
+        getEndOfDay(states.depart)
+    );
 
     const getFlights = async () => {
-        const flightsList = await fetchFilteredFlights({
-            departureCity: states.from.id,
-            destinationCity: states.to.id,
-            departureTimeStart: getStartOfDay(states.depart),
-            departureTimeEnd: getEndOfDay(states.depart),
-        });
+        const flightsList = await fetchFilteredFlights(
+            states.from.id,
+            states.to.id,
+            getStartOfDay(departDate),
+            getEndOfDay(departDate)
+        );
         setFlights(flightsList);
-    }
+    };
 
     useEffect(() => {
         getFlights();
@@ -77,50 +83,46 @@ function SearchFlight() {
             <AnimatePresence>
                 {showModify && (
                     <motion.div
-                        className="max-w-6xl m-auto border-x-2 border-b-2 grid-cols-2 grid px-4 pt-10 pb-4 rounded-xl shadow-md"
+                        className="w-full"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.2 }}
                     >
-                        <div className="flex flex-col p-2">
-                            <label className="">From</label>
-                            <input
-                                type="text"
-                                className="p-1 border-2 rounded-lg"
-                            ></input>
-                        </div>
-                        <div className="flex flex-col p-2">
-                            <label className="">To</label>
-                            <input
-                                type="text"
-                                className="p-1 border-2 rounded-lg"
-                            ></input>
-                        </div>
-                        <div className="flex flex-col p-2">
-                            <label className="">Depart</label>
-                            <input
-                                type="text"
-                                className="p-1 border-2 rounded-lg"
-                            ></input>
-                        </div>
-                        <div className="flex flex-col p-2">
-                            <label className="">Arrive</label>
-                            <input
-                                type="text"
-                                className="p-1 border-2 rounded-lg"
-                            ></input>
-                        </div>
-                        <div className="col-start-2 flex justify-end p-2">
-                            <button className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed">
-                                Confirm Change
-                            </button>
+                        <div className="m-auto border-x-2 border-b-2 px-4 pt-10 pb-4 rounded-xl shadow-md">
+                            <div className="flex">
+                                <div className="flex flex-col p-2 grow">
+                                    <label className="">From</label>
+                                    <input
+                                        type="text"
+                                        className="p-1 border-2 rounded-lg"
+                                    ></input>
+                                </div>
+                                <div className="flex flex-col p-2 grow">
+                                    <label className="">To</label>
+                                    <input
+                                        type="text"
+                                        className="p-1 border-2 rounded-lg"
+                                    ></input>
+                                </div>
+                                <div className="flex flex-col p-2 grow">
+                                    <label className="">Depart</label>
+                                    <input
+                                        type="text"
+                                        className="p-1 border-2 rounded-lg"
+                                    ></input>
+                                </div>
+                            </div>
+                            <div className="flex justify-end p-2">
+                                <button className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed">
+                                    Confirm Change
+                                </button>
+                            </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-            <div className="h-4"></div>
-            <div className="mt-10">
+            <div className="mt-20">
                 {flights.map((flight) => (
                     <FlightCard flight={flight}></FlightCard>
                 ))}
