@@ -1,9 +1,9 @@
-import logo from "../assets/image/QAirlineLogoFinal.png";
+import logo from "../../assets/image/QAirlineLogoFinal.png";
 import DropDownMenu from "./DropDownMenu";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileMenu from "./ProfileMenu";
-import { fetchUserData } from "../api/api";
+import { fetchUserData } from "../../api/api";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

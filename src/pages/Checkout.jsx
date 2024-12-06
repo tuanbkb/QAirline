@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ShoppingCartItem from "../components/ShoppingCardItem";
+import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 
 function Checkout() {
     const [flights, setFlights] = useState([

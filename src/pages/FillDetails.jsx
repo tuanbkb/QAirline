@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import FillDetailsTextField from "../components/FillDetailsTextField";
-import ShoppingCartItem from "../components/ShoppingCardItem";
+import FillDetailsTextField from "../components/FillDetails/FillDetailsTextField";
+import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 import { useEffect, useState } from "react";
 import { fetchUserData } from "../api/api";
 import { getFormattedDate } from "../utils/TimeFormat";
@@ -11,11 +11,13 @@ function FillDetails() {
     const [name, setName] = useState("");
     const [dob, setDob] = useState("");
     const [address, setAddress] = useState("");
+    const [id, setId] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [nameError, setNameError] = useState("");
     const [dobError, setDobError] = useState("");
     const [addressError, setAddressError] = useState("");
+    const [idError, setIdError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [phoneError, setPhoneError] = useState("");
 
@@ -36,6 +38,7 @@ function FillDetails() {
         setNameError("");
         setDobError("");
         setAddressError("");
+        setIdError("");
         setEmailError("");
         setPhoneError("");
         let error = false;
@@ -52,6 +55,13 @@ function FillDetails() {
         }
         if (address.trim() === "") {
             setAddressError("Address can't be blank");
+            error = true;
+        }
+        if (id.trim() === "") {
+            setIdError("ID can't be blank");
+            error = true;
+        } else if (!/^\d+$/.test(id)) {
+            setIdError("Invalid ID");
             error = true;
         }
         if (email.trim() === "") {
@@ -108,6 +118,15 @@ function FillDetails() {
                         onChange={(e) => setAddress(e.target.value)}
                     />
                     <span className="text-theme-error">{addressError}</span>
+                </div>
+                <div className="mb-4">
+                    <FillDetailsTextField
+                        label="ID Number"
+                        value={id}
+                        placeholder="Enter your ID number"
+                        onChange={(e) => setId(e.target.value)}
+                    />
+                    <span className="text-theme-error">{idError}</span>
                 </div>
                 <div className="mb-4">
                     <FillDetailsTextField

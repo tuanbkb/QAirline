@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import background from "../assets/image/background.jpg";
-import BookFlight from "../components/BookFlight";
-import Header from "../components/Header";
+import BookFlight from "../components/Home/BookFlight";
+import Header from "../components/Header/Header";
 import { useEffect } from "react";
 import Explore from "./Explore";
 import NewsDetailsPage from "./NewsDetailsPage";

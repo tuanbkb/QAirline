@@ -1,4 +1,4 @@
-import {formatTime, calculateDuration, getFormattedDate, formatDate, getCorrectJSTime} from "../utils/TimeFormat";
+import {formatTime, calculateDuration, getFormattedDate, formatDate, getCorrectJSTime} from "../../utils/TimeFormat";
 
 function FlightCard({ flight }) {
     const from = flight.originAirport.airportName;

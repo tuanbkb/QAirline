@@ -1,4 +1,4 @@
-import { formatDate, formatTime, calculateDuration } from "../utils/TimeFormat"
+import { formatDate, formatTime, calculateDuration } from "../../utils/TimeFormat"
 
 function ShoppingCartItem({ flight }) {
     return (

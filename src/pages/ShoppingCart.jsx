@@ -1,4 +1,4 @@
-import ShoppingCartItem from "../components/ShoppingCardItem";
+import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 import { useState } from "react";
 
 

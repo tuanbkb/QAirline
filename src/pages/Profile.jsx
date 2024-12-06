@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FillDetailsTextField from "../components/FillDetailsTextField";
+import FillDetailsTextField from "../components/FillDetails/FillDetailsTextField";
 import { fetchUserData, putUserProfile } from "../api/api";
 import { getFormattedDate, convertToSendFormat } from "../utils/TimeFormat";
 import Calendar from "react-calendar";

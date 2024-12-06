@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FlightCard from "../components/FlightCard";
+import FlightCard from "../components/SearchFlight/FlightCard";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { formatDate, getEndOfDay, getStartOfDay } from "../utils/TimeFormat";

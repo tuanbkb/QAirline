@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchAllCities } from "../api/api";
+import { fetchAllCities } from "../../api/api";
 
 function AirportList({ chooseAirport, showAirportList }) {
     //NETWORK

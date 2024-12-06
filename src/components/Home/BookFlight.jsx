@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import AirportList from "./AirportList";
-import CalendarPick from "./CalendarPick";
+import CalendarPick from "../CalendarPick";
 import { useNavigate } from "react-router-dom";
-import { fetchAllCities } from "../api/api";
-import { getFormattedDate } from "../utils/TimeFormat";
+import { fetchAllCities } from "../../api/api";
+import { getFormattedDate } from "../../utils/TimeFormat";
 
 function BookFlight() {
     // //NETWORK
