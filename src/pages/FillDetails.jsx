@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FillDetailsTextField from "../components/FillDetails/FillDetailsTextField";
 import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 import { useEffect, useState } from "react";
@@ -7,6 +7,10 @@ import { getFormattedDate } from "../utils/TimeFormat";
 
 function FillDetails() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const states = location.state;
+    const flight = states.flight;
+    const isEconomy = states.isEconomy;
 
     const [name, setName] = useState("");
     const [dob, setDob] = useState("");
@@ -24,7 +28,11 @@ function FillDetails() {
     const getUserData = async () => {
         const userData = await fetchUserData();
         setName(userData.firstName == null ? "" : userData.firstName);
-        setDob(userData.dateOfBirth == null ? "" : getFormattedDate(new Date(userData.dateOfBirth)));
+        setDob(
+            userData.dateOfBirth == null
+                ? ""
+                : getFormattedDate(new Date(userData.dateOfBirth))
+        );
         setEmail(userData.email == null ? "" : userData.email);
         setAddress(userData.address == null ? "" : userData.address);
         setPhone(userData.phone == null ? "" : userData.phone);
@@ -32,7 +40,7 @@ function FillDetails() {
 
     useEffect(() => {
         getUserData();
-    }, [])
+    }, []);
 
     const handleToCheckoutButtonClicked = () => {
         setNameError("");
@@ -79,7 +87,19 @@ function FillDetails() {
             error = true;
         }
 
-        if (!error) navigate("/checkout");
+        if (!error)
+            navigate("/checkout", {
+                state: {
+                    flight: flight,
+                    isEconomy: isEconomy,
+                    name: name,
+                    dob: dob,
+                    address: address,
+                    id: id,
+                    email: email,
+                    phone: phone,
+                },
+            });
     };
 
     return (

@@ -1,4 +1,11 @@
-import {formatTime, calculateDuration, getFormattedDate, formatDate, getCorrectJSTime} from "../../utils/TimeFormat";
+import { useNavigate } from "react-router-dom";
+import {
+    formatTime,
+    calculateDuration,
+    getFormattedDate,
+    formatDate,
+    getCorrectJSTime,
+} from "../../utils/TimeFormat";
 
 function FlightCard({ flight }) {
     const from = flight.originAirport.airportName;
@@ -11,6 +18,8 @@ function FlightCard({ flight }) {
     const availableBusinessSeats = flight.availableBusinessSeats;
     const id = flight.flightNumber;
     const plane = flight.plane.brand + " " + flight.plane.model;
+
+    const navigate = useNavigate();
 
     return (
         <div className="border-2 rounded-xl shadow-md w-full my-4 flex">
@@ -40,21 +49,39 @@ function FlightCard({ flight }) {
                     {id} by {plane}
                 </h3>
             </div>
-            <div className="bg-theme-primary p-2 basis-1/6 flex flex-col items-center">
+            <div
+                className="bg-theme-primary p-2 basis-1/6 flex flex-col items-center cursor-pointer"
+                onClick={() =>
+                    navigate("/shoppingcart", {
+                        state: { flight: flight, isEconomy: true },
+                    })
+                }
+            >
                 <label className="text-white font-bold text-sm">ECONOMY</label>
                 <div className="h-2"></div>
                 <h3 className="text-white font-bold text-4xl">
                     {economyPrice}
                 </h3>
                 <h4 className="text-white font-bold">USD</h4>
-                <h4 className="text-white text-sm"><strong>{availableEconomySeats}</strong> remaining</h4>
+                <h4 className="text-white text-sm">
+                    <strong>{availableEconomySeats}</strong> remaining
+                </h4>
             </div>
-            <div className="bg-theme-inversePrimary p-2 basis-1/6 flex flex-col items-center rounded-r-xl">
+            <div
+                className="bg-theme-inversePrimary p-2 basis-1/6 flex flex-col items-center rounded-r-xl cursor-pointer"
+                onClick={() =>
+                    navigate("/shoppingcart", {
+                        state: { flight: flight, isEconomy: false }
+                    })
+                }
+            >
                 <label className="font-bold text-sm">BUSINESS</label>
                 <div className="h-2"></div>
                 <h3 className="font-bold text-4xl">{businessPrice}</h3>
                 <h4 className="font-bold">USD</h4>
-                <h4 className="text-sm"><strong>{availableBusinessSeats}</strong> remaining</h4>
+                <h4 className="text-sm">
+                    <strong>{availableBusinessSeats}</strong> remaining
+                </h4>
             </div>
         </div>
     );

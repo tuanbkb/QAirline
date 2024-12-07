@@ -1,16 +1,28 @@
-import { formatDate, formatTime, calculateDuration } from "../../utils/TimeFormat"
+import { formatDate, formatTime, calculateDuration, getCorrectJSTime, getFormattedDate } from "../../utils/TimeFormat"
 
 function ShoppingCartItem({ flight }) {
+    const from = flight.originAirport.airportName;
+    const to = flight.destinationAirport.airportName;
+    const departure = getCorrectJSTime(flight.departureTime);
+    const arrival = getCorrectJSTime(flight.arrivalTime);
+    const economyPrice = flight.economyPrice;
+    const businessPrice = flight.businessPrice;
+    const availableEconomySeats = flight.availableEconomySeats;
+    const availableBusinessSeats = flight.availableBusinessSeats;
+    const id = flight.flightNumber;
+    const plane = flight.plane.brand + " " + flight.plane.model;
+
     return (
-        <div className="w-full border-2 rounded-xl shadow-md my-4 mx-2 flex flex-col p-2">
-            <div className="border-b-2 py-2 bg-theme-primaryContainer">
-                <h3 className=""><strong>{flight.start_airport.city}</strong> to <strong>{flight.end_airport.city}</strong> - <strong>{formatDate(flight.start_time)}</strong></h3>
+        <div className="w-full border-2 rounded-xl shadow-md my-4 mx-2 flex flex-col">
+            <div className="border-b-2 py-2 bg-theme-primaryContainer p-2 rounded-t-md text-center">
+                <h3 className=""><strong>{from}</strong> to <strong>{to}</strong></h3>
             </div>
             <div className="py-2 flex">
                 <div className="basis-1/2 border-r-2 p-2 flex justify-center">
                     <div className="flex flex-col items-center justify-center">
-                        <div className="font-bold">{formatTime(flight.start_time)}</div>
-                        <div className="">{flight.start_airport.name}</div>
+                        <div className="">{getFormattedDate(departure)}</div>
+                        <div className="font-bold">{formatTime(departure)}</div>
+                        <div className="">{from}</div>
                     </div>
                     <div className="flex flex-col justify-center p-4">
                         <span className="text-theme-primary font-bold">
@@ -18,17 +30,21 @@ function ShoppingCartItem({ flight }) {
                         </span>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <div className="font-bold">{formatTime(flight.end_time)}</div>
-                        <div className="">{flight.end_airport.name}</div>
+                        <div className="">{getFormattedDate(arrival)}</div>
+                        <div className="font-bold">{formatTime(arrival)}</div>
+                        <div className="">{to}</div>
                     </div>
                 </div>
-                <div className="basis-1/2 justify-center flex-col flex p-2">
+                <div className="basis-1/2 justify-center flex-col flex p-2 items-center">
                     <h3 className="">
                         Flight Duration:{" "}
-                        <span className="font-bold">{calculateDuration(flight.start_time, flight.end_time)}</span>
+                        <span className="font-bold">{calculateDuration(departure, arrival)}</span>
                     </h3>
                     <h3 className="">
-
+                        Flight Number: {id}
+                    </h3>
+                    <h3 className="">
+                        Plane: {plane}
                     </h3>
                 </div>
             </div>
