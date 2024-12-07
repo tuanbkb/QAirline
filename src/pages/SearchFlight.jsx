@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from "react";
 import FlightCard from "../components/SearchFlight/FlightCard";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
-import { formatDate, getEndOfDay, getStartOfDay } from "../utils/TimeFormat";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+    formatDate,
+    getEndOfDay,
+    getFormattedDate,
+    getStartOfDay,
+} from "../utils/TimeFormat";
 import { fetchFilteredFlights } from "../api/api";
+import AirportList from "../components/Home/AirportList";
+import CalendarPick from "../components/CalendarPick";
 
 function SearchFlight() {
+    //UI LOGIC
+    const navigate = useNavigate();
     const [showModify, setShowModify] = useState(false);
+    const [showAirportListFrom, setShowAirportListFrom] = useState(false);
+    const [showAirportListTo, setShowAirportListTo] = useState(false);
+    const [showCalendar, setShowCalendar] = useState(false);
 
-    // const [flights, setFlights] = useState([]);
+    //STATE MANAGEMENT
     const location = useLocation();
     const states = location.state;
 
-    // MOCK DATA
     const [flights, setFlights] = useState([]);
+    const [buttonClicked, setButtonClicked] = useState(false);
 
-    //GET REAL DATA
+    //DATA
+    const [from, setFrom] = useState("");
+    const [to, setTo] = useState("");
+    const [depart, setDepart] = useState("");
+    const [fromError, setFromError] = useState("");
+    const [toError, setToError] = useState("");
+    const [departError, setDepartError] = useState("");
+
     const fromCityCode = states.from.cityCode;
     const fromCityName = states.from.cityName;
     const toCityCode = states.to.cityCode;
@@ -42,7 +61,50 @@ function SearchFlight() {
 
     useEffect(() => {
         getFlights();
-    }, []);
+
+        if (buttonClicked) {
+            navigate("/searchflight", {state:{from, to, depart}});
+            setButtonClicked(false);
+            setShowAirportListFrom(false);
+            setShowAirportListTo(false);
+            setShowCalendar(false);
+        }
+    }, [buttonClicked]);
+
+    const handleChangeButtonClicked = () => {
+        console.log("clicked");
+        console.log(from, to, depart);
+        let error = false;
+        setFromError("");
+        setToError("");
+        setDepartError("");
+        if (from === "") {
+            setFromError("Please choose a city");
+            error = true;
+        }
+        if (to === "") {
+            setToError("Please choose a city");
+            error = true;
+        }
+        if (depart === "") {
+            setDepartError("Please choose a date");
+            error = true;
+        }
+
+        if (error) return;
+        setButtonClicked(true);
+        // try {
+        //     navigate("/search", {
+        //         state: {
+        //             from: from,
+        //             to: to,
+        //             depart: depart,
+        //         },
+        //     });
+        // } catch (error) {   
+        //     console.log(error);
+        // }
+    };
 
     return (
         <div className="max-w-6xl m-auto">
@@ -90,31 +152,88 @@ function SearchFlight() {
                         transition={{ duration: 0.2 }}
                     >
                         <div className="m-auto border-x-2 border-b-2 px-4 pt-10 pb-4 rounded-xl shadow-md">
-                            <div className="flex">
+                            <div className="flex max-md:flex-col">
                                 <div className="flex flex-col p-2 grow">
                                     <label className="">From</label>
                                     <input
                                         type="text"
+                                        value={from.cityName}
+                                        readOnly
+                                        onFocus={() => {
+                                            setShowAirportListFrom(true);
+                                            setShowAirportListTo(false);
+                                            setShowCalendar(false);
+                                        }}
                                         className="p-1 border-2 rounded-lg"
                                     ></input>
+                                    <div className="relative">
+                                        {showAirportListFrom && (
+                                            <AirportList
+                                                chooseAirport={setFrom}
+                                                showAirportList={
+                                                    setShowAirportListFrom
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                    <span className="text-theme-error">{fromError}</span>
                                 </div>
                                 <div className="flex flex-col p-2 grow">
                                     <label className="">To</label>
                                     <input
                                         type="text"
+                                        value={to.cityName}
+                                        readOnly
+                                        onFocus={() => {
+                                            setShowAirportListTo(true);
+                                            setShowAirportListFrom(false);
+                                            setShowCalendar(false);
+                                        }}
                                         className="p-1 border-2 rounded-lg"
                                     ></input>
+                                    <div className="relative">
+                                        {showAirportListTo && (
+                                            <AirportList
+                                                chooseAirport={setTo}
+                                                showAirportList={
+                                                    setShowAirportListTo
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                    <span className="text-theme-error">{toError}</span>
                                 </div>
                                 <div className="flex flex-col p-2 grow">
                                     <label className="">Depart</label>
                                     <input
                                         type="text"
+                                        value={getFormattedDate(depart)}
+                                        readOnly
+                                        onFocus={() => {
+                                            setShowCalendar(true);
+                                            setShowAirportListTo(false);
+                                            setShowAirportListFrom(false);
+                                        }}
                                         className="p-1 border-2 rounded-lg"
                                     ></input>
+                                    <div className="relative">
+                                        {showCalendar && (
+                                            <CalendarPick
+                                                chooseDate={setDepart}
+                                                setShowCalendar={
+                                                    setShowCalendar
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                    <span className="text-theme-error">{departError}</span>
                                 </div>
                             </div>
                             <div className="flex justify-end p-2">
-                                <button className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed">
+                                <button
+                                    className="bg-theme-primary shadow-md rounded-xl text-white font-bold p-2 hover:bg-theme-onSecondaryFixed"
+                                    onClick={handleChangeButtonClicked}
+                                >
                                     Confirm Change
                                 </button>
                             </div>
@@ -123,9 +242,13 @@ function SearchFlight() {
                 )}
             </AnimatePresence>
             <div className="mt-20">
-                {flights.map((flight) => (
-                    <FlightCard flight={flight}></FlightCard>
-                ))}
+                {flights.length !== 0 ? (
+                    flights.map((flight) => (
+                        <FlightCard flight={flight}></FlightCard>
+                    ))
+                ) : (
+                    <></>
+                )}
             </div>
         </div>
     );
