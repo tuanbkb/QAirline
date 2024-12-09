@@ -3,7 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function ProfileMenu() {
     const navigate = useNavigate();
-    const handleBookingHistoryClicked = () => {};
+    const handleBookingHistoryClicked = () => {
+        navigate("/bookinghistory");
+    };
     const handleProfileClicked = () => {
         navigate("/profile");
     };

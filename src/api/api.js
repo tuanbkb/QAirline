@@ -257,6 +257,33 @@ export const signUpApi = async (username, password, email) => {
   }
 };
 
+
+export const forgotPasswordApi = async (email) => {
+  try {
+    const response = await clientNoInterceptor.post("/api/customer/v1/forgot_password", email, {
+      headers: {
+        "Content-Type": "text/plain", // Xác định định dạng dữ liệu
+      },
+    });
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error paying ticket:", error);
+    throw error;
+  }
+}
+
+export const resetPasswordApi = async (data) => {
+  try {
+    const response = await clientNoInterceptor.post("/api/customer/v1/create_new_password", data);
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error reset password:", error);
+    throw error;
+  }
+}
+
 export const putUserProfile = async (data) => {
   try {
     const response = await apiClient.put("/api/customer/v1/edit", data);
@@ -323,3 +350,13 @@ export const postPayTicket = async (data) => {
     throw error;
   }
 }
+
+// export const fetchAllTickets = async () => {
+//   try {
+//     const response = await apiClient.get("/api/customer/v1/booking");
+
+//   } catch (error) {
+//     console.error("Error fetching tickets data:", error);
+//     throw error;
+//   }
+// }

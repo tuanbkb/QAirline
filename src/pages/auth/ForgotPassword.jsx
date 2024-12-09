@@ -1,7 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import backgroundImage from "../../assets/image/background.jpg";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { useState } from "react";
+import { forgotPasswordApi } from "../../api/api";
 
 function ForgotPassword() {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ function ForgotPassword() {
 
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
-    function handleSubmitButtonClicked() {
+    const handleSubmitButtonClicked = async () => {
         setEmailError("");
         if (email.trim() === "") {
             setEmailError("Email can't be blank");
@@ -18,6 +19,7 @@ function ForgotPassword() {
         }
 
         //TODO: Implement
+        const result = await forgotPasswordApi(email);
         setSubmitted(true);
 
     }
@@ -31,7 +33,7 @@ function ForgotPassword() {
                 <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
                     <div className="pb-8 w-full">
                         <img
-                            className="m-auto cursor-pointer"
+                            className="m-auto h-[4rem]"
                             src={logo}
                             // onClick={() => navigate("/")}
                         ></img>

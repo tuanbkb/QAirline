@@ -1,14 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/image/background.jpg";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { useState } from "react";
+import { resetPasswordApi } from "../../api/api";
 
 function ResetPassword() {
     const navigate = useNavigate();
-    const handleImageClick = () => {
-        navigate("/");
-    };
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    // const handleImageClick = () => {
+    //     navigate("/");
+    // };
 
+    const token = queryParams.get("token");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [newPasswordError, setNewPasswordError] = useState("");
@@ -17,7 +21,7 @@ function ResetPassword() {
     const [isClicked, setIsClicked] = useState(false);
     const [isSucceed, setIsSucceed] = useState(true);
 
-    const handleResetButtonClick = () => {
+    const handleResetButtonClick = async () => {
         setNewPasswordError("");
         setConfirmPasswordError("");
 
@@ -38,14 +42,23 @@ function ResetPassword() {
             return;
         }
 
-        setIsClicked(true);
         //RESET PASSWORD
-        setIsSucceed(true);
+        console.log("click");
+        try {
+            const result = await resetPasswordApi({
+                token: token,
+                password: newPassword,
+            });
+            setIsClicked(true);
+            setIsSucceed(true);
+        } catch (error) {
+            setIsSucceed(false);
+        }
     };
 
     const handleReturnToLoginButtonClick = () => {
         navigate("/login");
-    }
+    };
 
     return (
         <>
@@ -56,7 +69,7 @@ function ResetPassword() {
                 <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl flex flex-col">
                     <div className="pb-8 w-full">
                         <img
-                            className="m-auto cursor-pointer"
+                            className="m-auto h-[4rem]"
                             src={logo}
                             // onClick={handleImageClick}
                         ></img>
@@ -70,7 +83,7 @@ function ResetPassword() {
                                 <div className="py-2">New Password</div>
                                 <input
                                     className="p-2 w-96 border-solid border-gray-500 border rounded-lg"
-                                    type="text"
+                                    type="password"
                                     placeholder="Enter your new password"
                                     value={newPassword}
                                     onChange={(e) =>
@@ -119,7 +132,9 @@ function ResetPassword() {
                                         <div className="grow"></div>
                                         <button
                                             className="bg-theme-primary rounded-xl text-white font-bold hover:bg-theme-onSecondaryFixed p-2"
-                                            onClick={handleReturnToLoginButtonClick}
+                                            onClick={
+                                                handleReturnToLoginButtonClick
+                                            }
                                         >
                                             Return to Login Screen
                                         </button>
@@ -138,7 +153,9 @@ function ResetPassword() {
                                         <div className="grow"></div>
                                         <button
                                             className="bg-theme-primary rounded-xl text-white font-bold hover:bg-theme-onSecondaryFixed p-2"
-                                            onClick={handleReturnToLoginButtonClick}
+                                            onClick={
+                                                handleReturnToLoginButtonClick
+                                            }
                                         >
                                             Return to Login Screen
                                         </button>

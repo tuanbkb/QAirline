@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import backgroundImage from "../../assets/image/background.jpg";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { Link, useNavigate } from "react-router-dom";
 import { signUpApi } from "../../api/api";
 
@@ -69,7 +69,7 @@ function SignUp() {
                 <div className="flex flex-col p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
                     <div className="pb-8 w-full">
                         <img
-                            className="m-auto cursor-pointer"
+                            className="m-auto h-[4rem]"
                             src={logo}
                         // onClick={handleImageClick}
                         ></img>

@@ -54,7 +54,7 @@ function Login() {
                 <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
                     <div className="pb-8 w-full">
                         <img
-                            className="m-auto cursor-pointer h-[4rem]"
+                            className="m-auto h-[4rem]"
                             src={logo}
                             // onClick={handleImageClick}
                         ></img>

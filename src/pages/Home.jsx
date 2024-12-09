@@ -16,6 +16,7 @@ import InformationDetails from "./Information/InformationCategory/InformationDet
 import DestinationDetails from "./Destinations/DestinationDetails";
 import Checkout from "./Checkout";
 import Profile from "./Profile";
+import BookingHistory from "./BookingHistory";
 
 function Home() {
     return (
@@ -48,6 +49,7 @@ function Home() {
                 <Route path="/news" element={<NewsPage />}></Route>
                 <Route path="/news/:id" element={<NewsDetailsPage />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/bookinghistory" element={<BookingHistory />} />
             </Routes>
             </div>
         </>
