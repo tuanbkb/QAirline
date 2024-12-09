@@ -13,8 +13,8 @@ function ShoppingCart() {
 
     const from = flight.originAirport.airportName;
     const to = flight.destinationAirport.airportName;
-    const fromCity = flight.originAirport.cityId;
-    const toCity = flight.destinationAirport.cityId;
+    const fromCity = flight.originAirport.city.cityName;
+    const toCity = flight.destinationAirport.city.cityName;
     const departure = getCorrectJSTime(flight.departureTime);
     const arrival = getCorrectJSTime(flight.arrivalTime);
     const economyPrice = flight.economyPrice;

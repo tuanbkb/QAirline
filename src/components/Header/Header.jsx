@@ -1,4 +1,5 @@
 import logo from "../../assets/image/QAirlineLogoFinal.png";
+import smalllogo from "../../assets/image/QAirlineLogoVer2_colored.png";
 import DropDownMenu from "./DropDownMenu";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,7 +1,10 @@
+import { useLocation } from "react-router-dom";
 import BookingResultDialog from "../components/BookingResultDialog";
 
 function BookingResult() {
-    const isSucceed = true;
+    const location = useLocation();
+    const states = location.state;
+    const isSucceed = states.isSucceed;
 
     return (
         <div className="w-max m-auto">

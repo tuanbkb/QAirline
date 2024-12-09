@@ -297,3 +297,29 @@ export const fetchAllCities = async () => {
     throw error;
   }
 };
+
+export const postTicket = async (data) => {
+  try {
+    const response = await apiClient.post("/api/customer/v1/booking", data);
+    // console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error posting ticket:", error);
+    throw error;
+  }
+}
+
+export const postPayTicket = async (data) => {
+  try {
+    const response = await apiClient.post("/api/customer/v1/booking/pay", data, {
+      headers: {
+        "Content-Type": "text/plain", // Xác định định dạng dữ liệu
+      },
+    });
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error paying ticket:", error);
+    throw error;
+  }
+}

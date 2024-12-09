@@ -37,6 +37,7 @@ function Home() {
                 <Route path="/shoppingcart" element={<ShoppingCart />} />
                 <Route path="/filldetails" element={<FillDetails />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/bookingresult" element={<BookingResult />} />
                 <Route path="/info" element={<InformationPage />} />
                 <Route path="/info/:folder" element={<InformationCategory />} />
                 <Route

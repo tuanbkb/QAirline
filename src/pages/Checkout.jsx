@@ -2,6 +2,8 @@ import { useState } from "react";
 import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaymentMethodPicker from "../components/Checkout/PaymentMethodPicker";
+import { postPayTicket, postTicket } from "../api/api";
+import { convertToSendFormat } from "../utils/TimeFormat";
 
 function Checkout() {
     const navigate = useNavigate();
@@ -17,7 +19,32 @@ function Checkout() {
     const email = states.email;
     const phone = states.phone;
 
-    const handleButtonClicked = () => {};
+    console.log(dob);
+
+    const handleButtonClicked = async () => {
+        try {
+            const result = await postTicket({
+                flight: flight.id,
+                name: name,
+                birthDay: dob,
+                address: address,
+                phone: phone,
+                email: email,
+                // ticketShoppingCart: "string",
+                idCard: id,
+                // seat: "string",
+                seatType: isEconomy ? "ECONOMY" : "BUSINESS",
+            });
+            console.log(result);
+            const ticketId = result.id;
+            console.log(ticketId);
+            const paidResult = await postPayTicket(ticketId);
+            navigate("/bookingresult", { state: { isSucceed: true } });
+        } catch (error) {
+            console.error(error);
+            navigate("/bookingresult", { state: { isSucceed: false } });
+        }
+    };
 
     return (
         <div className="max-w-6xl m-auto">
@@ -26,19 +53,39 @@ function Checkout() {
             </h1>
             <div className="h-10"></div>
             <div className="text-xl p-2">
-                <h3 className="font-bold"><em>Personal Information:</em></h3>
+                <h3 className="font-bold">
+                    <em>Personal Information:</em>
+                </h3>
                 <div className="">
-                    <p><em>Name: </em>{name}</p>
-                    <p><em>Date of Birth: </em>{dob}</p>
-                    <p><em>Address: </em>{address}</p>
-                    <p><em>ID: </em>{id}</p>
-                    <p><em>Email: </em>{email}</p>
-                    <p><em>Phone: </em>{phone}</p>
+                    <p>
+                        <em>Name: </em>
+                        {name}
+                    </p>
+                    <p>
+                        <em>Date of Birth: </em>
+                        {dob}
+                    </p>
+                    <p>
+                        <em>Address: </em>
+                        {address}
+                    </p>
+                    <p>
+                        <em>ID: </em>
+                        {id}
+                    </p>
+                    <p>
+                        <em>Email: </em>
+                        {email}
+                    </p>
+                    <p>
+                        <em>Phone: </em>
+                        {phone}
+                    </p>
                 </div>
             </div>
-            <ShoppingCartItem flight={flight} />
+            <ShoppingCartItem flight={flight} isEconomy={isEconomy} />
             <div className="my-4">
-                <h3 className="font-bold">Payment Method:</h3>
+                <h3 className="font-bold my-2">Payment Method:</h3>
                 <PaymentMethodPicker />
             </div>
             <div className="w-full flex flex-col items-end">

@@ -85,10 +85,7 @@ function Login() {
                     </div>
                     <span className="text-theme-error">{passwordError}</span>
                     <div className="flex py-6">
-                        <div className="flex-1">
-                            <input type="checkbox"></input>
-                            <span className="pl-2">Remember me</span>
-                        </div>
+                        <div className="grow"></div>
                         <Link
                             className="text-theme-primary italic underline hover:text-theme-tertiary"
                             to="/forgotpassword"

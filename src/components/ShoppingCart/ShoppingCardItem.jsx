@@ -1,10 +1,12 @@
 import { formatDate, formatTime, calculateDuration, getCorrectJSTime, getFormattedDate } from "../../utils/TimeFormat"
 
-function ShoppingCartItem({ flight }) {
+function ShoppingCartItem({ flight, isEconomy }) {
     const from = flight.originAirport.airportName;
     const to = flight.destinationAirport.airportName;
     const departure = getCorrectJSTime(flight.departureTime);
     const arrival = getCorrectJSTime(flight.arrivalTime);
+    const fromCity = flight.originAirport.city.cityName;
+    const toCity = flight.destinationAirport.city.cityName;
     const economyPrice = flight.economyPrice;
     const businessPrice = flight.businessPrice;
     const availableEconomySeats = flight.availableEconomySeats;
@@ -15,7 +17,7 @@ function ShoppingCartItem({ flight }) {
     return (
         <div className="w-full border-2 rounded-xl shadow-md my-4 mx-2 flex flex-col">
             <div className="border-b-2 py-2 bg-theme-primaryContainer p-2 rounded-t-md text-center">
-                <h3 className=""><strong>{from}</strong> to <strong>{to}</strong></h3>
+                <h3 className=""><strong>{fromCity}</strong> to <strong>{toCity}</strong> - {isEconomy ? "Economy" : "Business"}</h3>
             </div>
             <div className="py-2 flex">
                 <div className="basis-1/2 border-r-2 p-2 flex justify-center">
