@@ -31,7 +31,7 @@ function Explore() {
               className={
                 index % 4 === 0 || index % 4 === 3 ? "col-span-2" : "col-span-1"
               }
-              key={destination.name}
+              key={index}
             >
               <RectangleCard
                 imageUrl={destination.image}

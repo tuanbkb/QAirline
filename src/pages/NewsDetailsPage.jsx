@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchMockNews, getNewsById } from "../api/api";
 import BackButton from "../components/BackButton";
 import { CircularProgress } from "@mui/material";
 
 const NewsDetailsPage = () => {
-  const { id } = useParams(); // Get the news ID from the URL
-  const [news, setNews] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  const fetchNews = async () => {
-    const selectedNews = await getNewsById(id);
-    setNews(selectedNews.results);
-  };
+  const location = useLocation();
+  const news = location.state;
 
   if (!news) {
     return (
