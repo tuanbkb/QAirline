@@ -72,13 +72,13 @@ export function convertToSendFormat(date) {
 export function getStartOfDay(date) {
     if (!(date instanceof Date)) return "";
     date.setHours(0, 0, 0, 0);
-    let utcDate = date.getTime() - 7 * 60 * 60 * 1000;
-    return convertToSendFormat(new Date(utcDate));
+    // let utcDate = date.getTime() - 7 * 60 * 60 * 1000;
+    return convertToSendFormat(new Date(date));
 }
 
 export function getEndOfDay(date) {
     if (!(date instanceof Date)) return "";
     date.setHours(23, 59, 59, 999);
-    let utcDate = date.getTime() - 7 * 60 * 60 * 1000;
-    return convertToSendFormat(new Date(utcDate));
+    // let utcDate = date.getTime() - 7 * 60 * 60 * 1000;
+    return convertToSendFormat(new Date(date));
 }

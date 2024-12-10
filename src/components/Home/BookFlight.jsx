@@ -42,24 +42,25 @@ function BookFlight() {
     }
 
     // AIRPORT LIST FUNCTIONS
-    const [showAirportList, setShowAirportList] = useState(false);
-    const [isCurrentAirportInputFrom, setIsCurrentAirportInputFrom] =
-        useState(false);
+    const [showAirportListFrom, setShowAirportListFrom] = useState(false);
+    const [showAirportListTo, setShowAirportListTo] = useState(false);
+    // const [isCurrentAirportInputFrom, setIsCurrentAirportInputFrom] =
+    //     useState(false);
 
-    function handleAirportChosen(airport) {
-        if (isCurrentAirportInputFrom === true) setFrom(airport);
-        else setTo(airport);
-    }
+    // function handleAirportChosen(airport) {
+    //     if (isCurrentAirportInputFrom === true) setFrom(airport);
+    //     else setTo(airport);
+    // }
 
     // CALENDAR FUNCTIONS
     const [showCalendar, setShowCalendar] = useState(false);
-    const [isCurrentDateInputDepart, setIsCurrentDateInputDepart] =
-        useState(true);
+    // const [isCurrentDateInputDepart, setIsCurrentDateInputDepart] =
+    //     useState(true);
 
-    function handleDateChosen(date) {
-        if (isCurrentDateInputDepart === true) setDepart(date);
-        else setReturnDate(date);
-    }
+    // function handleDateChosen(date) {
+    //     if (isCurrentDateInputDepart === true) setDepart(date);
+    //     else setReturnDate(date);
+    // }
 
     // function getFormattedDate(date) {
     //     if (!(date instanceof Date)) return "";
@@ -116,9 +117,9 @@ function BookFlight() {
                 </ul>
                 <div className="p-4 bg-white">
                     {menuOption === "Book" ? (
-                        <div className="flex gap-5">
-                            <ul className="flex grow gap-2 items-center">
-                                <li className="flex flex-col border p-2 grow">
+                        <div className="flex gap-5 max-lg:flex-col">
+                            <ul className="flex grow gap-2 items-center max-lg:flex-col">
+                                <li className="flex flex-col border p-2 grow max-lg:w-full">
                                     <label className="text-theme-outline">
                                         From
                                     </label>
@@ -131,11 +132,21 @@ function BookFlight() {
                                             setFrom(e.target.value)
                                         }
                                         onFocus={() => {
-                                            setShowAirportList(true);
-                                            setIsCurrentAirportInputFrom(true);
+                                            setShowAirportListFrom(true);
+                                            setShowAirportListTo(false);
                                             setShowCalendar(false);
                                         }}
                                     ></input>
+                                    <div className="relative top-1">
+                                        {showAirportListFrom && (
+                                            <AirportList
+                                                chooseAirport={setFrom}
+                                                showAirportList={
+                                                    setShowAirportListFrom
+                                                }
+                                            />
+                                        )}
+                                    </div>
                                 </li>
                                 <button
                                     className="bg-theme-inversePrimary rounded-full h-min px-2 py-1"
@@ -143,7 +154,7 @@ function BookFlight() {
                                 >
                                     &#8644;
                                 </button>
-                                <li className="flex flex-col grow border p-2">
+                                <li className="flex flex-col grow border p-2 max-lg:w-full">
                                     <label className="text-theme-outline">
                                         To
                                     </label>
@@ -154,13 +165,23 @@ function BookFlight() {
                                         placeholder="Saigon"
                                         onChange={(e) => setTo(e.target.value)}
                                         onFocus={() => {
-                                            setShowAirportList(true);
-                                            setIsCurrentAirportInputFrom(false);
+                                            setShowAirportListTo(true);
+                                            setShowAirportListFrom(false);
                                             setShowCalendar(false);
                                         }}
                                     ></input>
+                                    <div className="relative top-1">
+                                        {showAirportListTo && (
+                                            <AirportList
+                                                chooseAirport={setTo}
+                                                showAirportList={
+                                                    setShowAirportListTo
+                                                }
+                                            />
+                                        )}
+                                    </div>
                                 </li>
-                                <li className="flex flex-col grow border p-2">
+                                <li className="flex flex-col grow border p-2 max-lg:w-full">
                                     <label className="text-theme-outline">
                                         Depart
                                     </label>
@@ -171,10 +192,20 @@ function BookFlight() {
                                         placeholder="dd/mm/yyyy"
                                         onFocus={() => {
                                             setShowCalendar(true);
-                                            setIsCurrentDateInputDepart(true);
-                                            setShowAirportList(false);
+                                            setShowAirportListFrom(false);
+                                            setShowAirportListTo(false);
                                         }}
                                     ></input>
+                                    <div className="relative top-1">
+                                        {showCalendar && (
+                                            <CalendarPick
+                                                chooseDate={setDepart}
+                                                setShowCalendar={
+                                                    setShowCalendar
+                                                }
+                                            />
+                                        )}
+                                    </div>
                                 </li>
                                 {/* <li className="flex flex-col border grow p-2">
                                     <label className="text-theme-outline">
@@ -238,20 +269,20 @@ function BookFlight() {
             </div>
 
             {/* AIRPORT LIST -------------------------------------------------------------------------------------------------------------*/}
-            {showAirportList && (
+            {/* {showAirportList && (
                 <AirportList
                     chooseAirport={handleAirportChosen}
                     showAirportList={setShowAirportList}
                 ></AirportList>
-            )}
+            )} */}
 
             {/* CALENDAR -------------------------------------------------------------------------------------------------------------*/}
-            {showCalendar && (
+            {/* {showCalendar && (
                 <CalendarPick
                     chooseDate={handleDateChosen}
                     setShowCalendar={setShowCalendar}
                 />
-            )}
+            )} */}
         </div>
     );
 }

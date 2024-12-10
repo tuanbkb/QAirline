@@ -27,30 +27,36 @@ function Home() {
                 style={{ backgroundImage: `url(${background})` }}
             ></div>
             <div className="px-2">
-            <Routes>
-                <Route path="/" element={<BookFlight />} />
-                <Route path="/explore" element={<Explore />} />
-                <Route
-                    path="/explore/:destinationId"
-                    element={<DestinationDetails />}
-                />
-                <Route path="/searchflight" element={<SearchFlight />} />
-                <Route path="/shoppingcart" element={<ShoppingCart />} />
-                <Route path="/filldetails" element={<FillDetails />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/bookingresult" element={<BookingResult />} />
-                <Route path="/info" element={<InformationPage />} />
-                <Route path="/info/:folder" element={<InformationCategory />} />
-                <Route
-                    path="/info/:folder/:id"
-                    element={<InformationDetails />}
-                />
-                <Route path="/result" element={<BookingResult />} />
-                <Route path="/news" element={<NewsPage />}></Route>
-                <Route path="/news/:id" element={<NewsDetailsPage />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/bookinghistory" element={<BookingHistory />} />
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<BookFlight />} />
+                    <Route path="/explore" element={<Explore />} />
+                    <Route
+                        path="/explore/:destinationId"
+                        element={<DestinationDetails />}
+                    />
+                    <Route path="/searchflight" element={<SearchFlight />} />
+                    <Route path="/shoppingcart" element={<ShoppingCart />} />
+                    <Route path="/filldetails" element={<FillDetails />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/bookingresult" element={<BookingResult />} />
+                    <Route path="/info" element={<InformationPage />} />
+                    <Route
+                        path="/info/:folder"
+                        element={<InformationCategory />}
+                    />
+                    <Route
+                        path="/info/:folder/:id"
+                        element={<InformationDetails />}
+                    />
+                    <Route path="/result" element={<BookingResult />} />
+                    <Route path="/news" element={<NewsPage />}></Route>
+                    <Route path="/news/:id" element={<NewsDetailsPage />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route
+                        path="/bookinghistory"
+                        element={<BookingHistory />}
+                    />
+                </Routes>
             </div>
         </>
     );
