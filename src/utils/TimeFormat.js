@@ -13,7 +13,7 @@ export function formatTime(time) {
     var min = time.getMinutes();
 
     var res = "";
-    res += h > 10 ? h : "0" + h;
+    res += h >= 10 ? h : "0" + h;
     res += ":";
     res += min < 10 ? "0" + min : min;
     return res;

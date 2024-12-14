@@ -340,7 +340,7 @@ export const postPayTicket = async (data) => {
   try {
     const response = await apiClient.post("/api/customer/v1/booking/pay", data, {
       headers: {
-        "Content-Type": "text/plain", // Xác định định dạng dữ liệu
+        "Content-Type": "text/plain",
       },
     });
     console.log(response);
@@ -351,12 +351,39 @@ export const postPayTicket = async (data) => {
   }
 }
 
-// export const fetchAllTickets = async () => {
-//   try {
-//     const response = await apiClient.get("/api/customer/v1/booking");
+export const fetchAllTickets = async () => {
+  try {
+    const response = await apiClient.get("/api/customer/v1/booking");
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching tickets data:", error);
+    throw error;
+  }
+}
 
-//   } catch (error) {
-//     console.error("Error fetching tickets data:", error);
-//     throw error;
-//   }
-// }
+export const putTicket = async (data) => {
+  try {
+    const response = await apiClient.put("/api/customer/v1/booking", data);
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error updating ticket:", error);
+    throw error;
+  }
+}
+
+export const deleteTicket = async (id) => {
+  try {
+    const response = await apiClient.delete("/api/customer/v1/booking", {
+      params: {
+        id,
+      },
+    });
+    console.log(response);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error deleting ticket:", error);
+    throw error;
+  }
+}

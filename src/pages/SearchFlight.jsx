@@ -152,7 +152,7 @@ function SearchFlight() {
                         transition={{ duration: 0.2 }}
                     >
                         <div className="m-auto border-x-2 border-b-2 px-4 pt-10 pb-4 rounded-xl shadow-md">
-                            <div className="flex max-md:flex-col">
+                            <div className="flex max-lg:flex-col">
                                 <div className="flex flex-col p-2 grow">
                                     <label className="">From</label>
                                     <input

@@ -1,10 +1,11 @@
-function FillDetailsTextField({ label, value, placeholder, onChange }) {
+function FillDetailsTextField({ label, value, placeholder, onChange, disabled = false }) {
     return (
         <div className="relative">
             <input
                 className="p-2 border-2 rounded-lg block w-full"
                 type="text"
                 value={value}
+                disabled={disabled}
                 onChange={onChange}
                 placeholder={placeholder}
             />
