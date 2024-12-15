@@ -22,21 +22,19 @@ const NewsPage = () => {
     }
   };
 
-  const handleSeeMore = (id) => {
-    navigate(`/news/${id}`); // Navigate to the news detail page
-  };
-
   return (
     <div className="flex justify-center mt-5">
       <div className="w-[70vw]">
         <h1 className="mt-4 text-2xl text-grey-800">NEWS & OFFERS</h1>
         <div className=" grid grid-cols-2 gap-5 mt-5">
-          {newsList.map((news) => (
+          {newsList.map((news, index) => (
             <RectangleCard
               key={news.id}
               name={news.title}
               imageUrl={news.imageUrl}
-              onCardClick={() => handleSeeMore(news.id)}
+              onCardClick={() => {
+                navigate(`/news/${index}`, { state: news });
+              }}
             />
           ))}
         </div>

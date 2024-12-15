@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getNewsById } from "../../../../api/api";
 
 export default function InformationDetails() {
+  const location = useLocation();
   const { folder, id } = useParams();
-  const [news, setNews] = useState(null);
+  const [news, setNews] = useState(location.state);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchNews();
+    if (!news) {
+      fetchNews();
+    }
   }, []);
 
   const fetchNews = async () => {

@@ -32,7 +32,15 @@ apiClient.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      originalRequest._retry
+    ) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      window.location.href = "/login";
+    }
     if (
       error.response &&
       error.response.status === 401 &&
@@ -77,91 +85,9 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-// export const createFlight = async (data) => {
-//   try {
-//     const response = await apiClient.post("/api/admin/v1/flights", data);
-//     return response.data.results;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// export const updateFlight = async (data) => {
-//   try {
-//     const response = await apiClient.put("/api/admin/v1/flights", data);
-//     return response.data.results;
-//   } catch (err) {
-//     throw err;
-//   }
-// };
-
-// export const getFlightsData = async () => {
-//   try {
-//     const response = await apiClient.get("/api/admin/v1/flights");
-//     return response.data.results;
-//   } catch (error) {
-//     console.error("Error fetching flights data:", error);
-//     throw error;
-//   }
-// };
-
-// export const fetchAircrafts = async () => {
-//   try {
-//     const response = await apiClient.get("/api/admin/v1/planes");
-//     return response.data.results;
-//   } catch (error) {
-//     console.error("Error fetching aircraft data:", error);
-//     throw error;
-//   }
-// };
-
-// export const createAircraft = async (data) => {
-//   try {
-//     const response = await apiClient.post("/api/admin/v1/planes", data);
-//     return response.data.message;
-//   } catch (error) {
-//     console.error("Error creating aircraft", error);
-//     throw error;
-//   }
-// };
-
-// export const updateAircraft = async (data) => {
-//   try {
-//     const response = await apiClient.put("/api/admin/v1/planes", data);
-//     return response.data.message;
-//   } catch (error) {
-//     console.error("Error updating aircraft", error);
-//     throw error;
-//   }
-// };
-
-// export const deleteAircraft = async (id) => {
-//   try {
-//     const response = await apiClient.delete("/api/admin/v1/planes", {
-//       params: {
-//         id: id,
-//       },
-//     });
-//     return response.data.message;
-//   } catch (error) {
-//     console.error("Error deleting aircraft", error);
-//     throw error;
-//   }
-// };
-
-// export const fetchAirports = async () => {
-//   try {
-//     const response = await apiClient.get("/api/admin/v1/airports");
-//     return response.data.results;
-//   } catch (error) {
-//     console.error("Error fetching airports data:", error);
-//     throw error;
-//   }
-// };
-
 export const getAllNews = async () => {
   try {
-    const response = await apiClient.get("/api/customer/v1/news/filterNews");
+    const response = await apiClient.get("/api/customer/v1/news/filter_news");
     return response.data;
   } catch (error) {
     throw error;
@@ -257,25 +183,31 @@ export const signUpApi = async (username, password, email) => {
   }
 };
 
-
 export const forgotPasswordApi = async (email) => {
   try {
-    const response = await clientNoInterceptor.post("/api/customer/v1/forgot_password", email, {
-      headers: {
-        "Content-Type": "text/plain", // Xác định định dạng dữ liệu
-      },
-    });
+    const response = await clientNoInterceptor.post(
+      "/api/customer/v1/forgot_password",
+      email,
+      {
+        headers: {
+          "Content-Type": "text/plain", // Xác định định dạng dữ liệu
+        },
+      }
+    );
     console.log(response);
     return response.data.results;
   } catch (error) {
     console.error("Error paying ticket:", error);
     throw error;
   }
-}
+};
 
 export const resetPasswordApi = async (data) => {
   try {
-    const response = await clientNoInterceptor.post("/api/customer/v1/create_new_password", data);
+    const response = await clientNoInterceptor.post(
+      "/api/customer/v1/create_new_password",
+      data
+    );
     console.log(response);
     return response.data.results;
   } catch (error) {
@@ -313,9 +245,9 @@ export const fetchFilteredFlights = async (from, to, start, end) => {
       arrivalCity: to,
       departureTimeStart: start,
       departureTimeEnd: end,
-    }
+    };
     const response = await apiClient.get("/api/customer/v1/flights/filter", {
-      params: data
+      params: data,
     });
     console.log("Filtered flights data:", response);
     return response.data.results;
@@ -345,7 +277,7 @@ export const postTicket = async (data) => {
     console.error("Error posting ticket:", error);
     throw error;
   }
-}
+};
 
 export const postPayTicket = async (data) => {
   try {
@@ -360,7 +292,7 @@ export const postPayTicket = async (data) => {
     console.error("Error paying ticket:", error);
     throw error;
   }
-}
+};
 
 export const fetchAllTickets = async () => {
   try {
