@@ -22,7 +22,7 @@ function ProfileMenu() {
     return (
         <AnimatePresence>
             <motion.div
-                className="absolute right-0 rounded-xl w-40 border-2 bg-white"
+                className="absolute right-0 rounded-xl w-40 border-2 bg-white z-10"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
