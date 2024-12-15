@@ -18,11 +18,11 @@ const NewsDetailsPage = () => {
   }
 
   return (
-    <div>
+    <div className="max-w-4xl m-auto">
       <img
         src={news.imageUrl}
         alt="Descriptive text"
-        className="w-full h-[250px] object-cover"
+        className="w-full max-h-[300px] object-cover object-[center_top]"
       />
       <div className="flex justify-center mt-5">
         <div className="w-[70vw]">

@@ -17,11 +17,11 @@ function Header() {
     navigate("/");
   };
 
-  const onHoverNavBar = (type) => {
-    setIsMenuOpen(true);
-    setMenuType(type);
-    setIsProfileMenuOpen(false);
-  };
+  // const onHoverNavBar = (type) => {
+  //   setIsMenuOpen(true);
+  //   setMenuType(type);
+  //   setIsProfileMenuOpen(false);
+  // };
 
   const [username, setUsername] = useState("");
   const getUserName = async () => {
@@ -124,11 +124,11 @@ function Header() {
           <span className="border-2 border-theme-primary w-10"></span>
         </div>
       </header>
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <div onMouseLeave={() => setIsMenuOpen(false)}>
           <DropDownMenu type={menuType} />
         </div>
-      )}
+      )} */}
       {isVerticalMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden">
           <VerticalMenu

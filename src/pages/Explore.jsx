@@ -20,9 +20,9 @@ function Explore() {
   };
 
   return (
-    <div className="max-w-6xl m-auto mb-2">
-      <h1 className="w-full text-center font-bold text-3xl text-theme-primary">
-        EXPLORE
+    <div className="max-w-6xl m-auto mb-2 mt-5">
+      <h1 className="w-full font-bold text-3xl text-theme-primary">
+        Checkout some of these spectacular destinations!
       </h1>
       <div className="grid grid-cols-3 mt-5 gap-2">
         {destinationList.map((destination, index) => {

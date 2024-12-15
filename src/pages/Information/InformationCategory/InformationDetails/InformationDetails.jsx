@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getNewsById } from "../../../../api/api";
+import BackButton from "../../../../components/BackButton";
 
 export default function InformationDetails() {
   const location = useLocation();
@@ -24,20 +25,21 @@ export default function InformationDetails() {
   }
 
   return (
-    <div>
+    <div className="max-w-4xl m-auto">
       <img
         src={news.imageUrl}
         alt="Descriptive text"
-        className="w-full h-[250px] object-cover"
+        className="w-full max-h-[300px] object-cover object-[center_top]"
       />
       <div className="flex justify-center mt-5">
         <div className="w-[70vw]">
-          <button
+          {/* <button
             className="border border-blue-500 text-blue-500 rounded px-4 py-2 hover:bg-blue-50"
             onClick={() => navigate(-1)}
           >
             Back
-          </button>
+          </button> */}
+          <BackButton />
           <p className="mt-2 text-gray-500 text-sm">Folder: {news.folder}</p>
           <p className="mt-2 text-gray-500 text-sm">
             Classification: {news.classification}
