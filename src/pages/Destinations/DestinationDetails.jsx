@@ -20,14 +20,14 @@ export default function DestinationDetails() {
   }, []);
 
   return (
-    <div>
+    <div className="max-w-5xl m-auto">
       <img
         src={destination.image}
         alt="Image"
-        className="w-full h-[250px] object-cover"
+        className="w-full max-h-[300px] object-cover"
       />
       <div className="flex justify-center mt-5">
-        <div className="w-[70vw]">
+        <div>
           <BackButton />
 
           <h1 className="mt-4 text-2xl font-bold text-gray-800">

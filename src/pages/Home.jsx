@@ -18,85 +18,129 @@ import Checkout from "./Checkout";
 import Profile from "./Profile";
 import BookingHistory from "./BookingHistory";
 import Footer from "../components/Footer/Footer";
+import RectangleCard from "../components/RectangleCard";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 function Home() {
-    const location = useLocation();
+  const location = useLocation();
+  const [destinationList, setDestinationList] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const routeTitles = {
-            "/explore": "Explore",
-            "/explore/:destinationId": "Destination Details",
-            "/searchflight": "Search Flight",
-            "/shoppingcart": "Shopping Cart",
-            "/filldetails": "Fill Details",
-            "/checkout": "Checkout",
-            "/bookingresult": "Booking Result",
-            "/info": "Information",
-            "/info/:folder": "Information Category",
-            "/info/:folder/:id": "Information Details",
-            "/result": "Booking Result",
-            "/news": "News",
-            "/news/:id": "News Details",
-            "/profile": "Profile",
-            "/bookinghistory": "Booking History",
-        };
+  const fetchDestinations = async () => {
+    const res = await axios.get("/destinationsData.json");
+    setDestinationList(res.data);
+  };
 
-        const currentTitle = routeTitles[location.pathname] || "QAirline";
-        document.title = currentTitle;
-    }, [location]);
+  useEffect(() => {
+    fetchDestinations();
+    const routeTitles = {
+      "/explore": "Explore",
+      "/explore/:destinationId": "Destination Details",
+      "/searchflight": "Search Flight",
+      "/shoppingcart": "Shopping Cart",
+      "/filldetails": "Fill Details",
+      "/checkout": "Checkout",
+      "/bookingresult": "Booking Result",
+      "/info": "Information",
+      "/info/:folder": "Information Category",
+      "/info/:folder/:id": "Information Details",
+      "/result": "Booking Result",
+      "/news": "News",
+      "/news/:id": "News Details",
+      "/profile": "Profile",
+      "/bookinghistory": "Booking History",
+    };
 
-    return (
-        <div className="min-h-screen">
-            <Header />
-            <div className="h-20"></div>
-            {/* <div
-                className="w-screen h-60 bg-cover bg-bottom mb-10 mt-4"
-                style={{ backgroundImage: `url(${background})` }}
-            ></div> */}
-            <div className="px-2 min-h-[calc(100vh-356px)]">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                <BookFlight />
-                                {/* ADD SOME GIBBERISH HERE */}
-                            </>
-                        }
-                    />
-                    <Route path="/explore" element={<Explore />} />
-                    <Route
-                        path="/explore/:destinationId"
-                        element={<DestinationDetails />}
-                    />
-                    <Route path="/searchflight" element={<SearchFlight />} />
-                    <Route path="/shoppingcart" element={<ShoppingCart />} />
-                    <Route path="/filldetails" element={<FillDetails />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/bookingresult" element={<BookingResult />} />
-                    <Route path="/info" element={<InformationPage />} />
-                    <Route
-                        path="/info/:folder"
-                        element={<InformationCategory />}
-                    />
-                    <Route
-                        path="/info/:folder/:id"
-                        element={<InformationDetails />}
-                    />
-                    <Route path="/result" element={<BookingResult />} />
-                    <Route path="/news" element={<NewsPage />}></Route>
-                    <Route path="/news/:id" element={<NewsDetailsPage />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route
-                        path="/bookinghistory"
-                        element={<BookingHistory />}
-                    />
-                </Routes>
-            </div>
-            <div className="h-20"></div>
-            <Footer />
-        </div>
-    );
+    const currentTitle = routeTitles[location.pathname] || "QAirline";
+    document.title = currentTitle;
+  }, [location]);
+
+  const handleClickDestination = (index) => {
+    navigate(`/explore/${index}`);
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <div className="px-2 min-h-[calc(100vh-356px)]">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="m-auto">
+                <div className="h-5"></div>
+                <BookFlight />
+                <div className="m-auto text-center my-5 text-2xl">
+                  Recommended destinations
+                </div>
+                <Carousel
+                  ssr={true}
+                  responsive={responsive}
+                  className="max-w-6xl m-auto"
+                >
+                  {destinationList.map((destination, index) => {
+                    return (
+                      <div className="mr-5" key={index}>
+                        <RectangleCard
+                          imageUrl={destination.image}
+                          name={destination["province/state"]}
+                          onCardClick={() => handleClickDestination(index)}
+                        />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+            }
+          />
+          <Route path="/explore" element={<Explore />} />
+          <Route
+            path="/explore/:destinationId"
+            element={<DestinationDetails />}
+          />
+          <Route path="/searchflight" element={<SearchFlight />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/filldetails" element={<FillDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/bookingresult" element={<BookingResult />} />
+          <Route path="/info" element={<InformationPage />} />
+          <Route path="/info/:folder" element={<InformationCategory />} />
+          <Route path="/info/:folder/:id" element={<InformationDetails />} />
+          <Route path="/result" element={<BookingResult />} />
+          <Route path="/news" element={<NewsPage />}></Route>
+          <Route path="/news/:id" element={<NewsDetailsPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/bookinghistory" element={<BookingHistory />} />
+        </Routes>
+      </div>
+      <div className="h-20"></div>
+      <Footer />
+    </div>
+  );
 }
 
 export default Home;
