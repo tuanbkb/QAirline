@@ -18,8 +18,34 @@ import Checkout from "./Checkout";
 import Profile from "./Profile";
 import BookingHistory from "./BookingHistory";
 import Footer from "../components/Footer/Footer";
+import { Helmet } from "react-helmet";
 
 function Home() {
+    const location = useLocation();
+
+    useEffect(() => {
+        const routeTitles = {
+            "/explore": "Explore",
+            "/explore/:destinationId": "Destination Details",
+            "/searchflight": "Search Flight",
+            "/shoppingcart": "Shopping Cart",
+            "/filldetails": "Fill Details",
+            "/checkout": "Checkout",
+            "/bookingresult": "Booking Result",
+            "/info": "Information",
+            "/info/:folder": "Information Category",
+            "/info/:folder/:id": "Information Details",
+            "/result": "Booking Result",
+            "/news": "News",
+            "/news/:id": "News Details",
+            "/profile": "Profile",
+            "/bookinghistory": "Booking History",
+        };
+
+        const currentTitle = routeTitles[location.pathname] || "QAirline";
+        document.title = currentTitle;
+    }, [location]);
+
     return (
         <div className="min-h-screen">
             <Header />
@@ -29,6 +55,7 @@ function Home() {
                 style={{ backgroundImage: `url(${background})` }}
             ></div> */}
             <div className="px-2 min-h-[calc(100vh-356px)]">
+                
                 <Routes>
                     <Route path="/" element={<BookFlight />} />
                     <Route path="/explore" element={<Explore />} />

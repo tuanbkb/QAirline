@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../assets/image/QAirlineLogoVer2_colored.png";
 
 function Footer() {
     return (
