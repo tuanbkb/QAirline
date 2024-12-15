@@ -11,6 +11,8 @@ import {
 import { fetchFilteredFlights } from "../api/api";
 import AirportList from "../components/Home/AirportList";
 import CalendarPick from "../components/CalendarPick";
+import Loading from "../components/Loading";
+import LoadingNoBg from "../components/LoadingNoBg";
 
 function SearchFlight() {
     //UI LOGIC
@@ -49,13 +51,17 @@ function SearchFlight() {
         getEndOfDay(states.depart)
     );
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const getFlights = async () => {
+        setIsLoading(true);
         const flightsList = await fetchFilteredFlights(
             states.from.id,
             states.to.id,
             getStartOfDay(departDate),
             getEndOfDay(departDate)
         );
+        setIsLoading(false);
         setFlights(flightsList);
     };
 
@@ -242,6 +248,7 @@ function SearchFlight() {
                 )}
             </AnimatePresence>
             <div className="mt-20">
+                {isLoading && <LoadingNoBg />}
                 {flights.length !== 0 ? (
                     flights.map((flight) => (
                         <FlightCard flight={flight}></FlightCard>

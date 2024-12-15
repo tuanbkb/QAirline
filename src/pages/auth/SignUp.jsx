@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/image/background.jpg";
 import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { Link, useNavigate } from "react-router-dom";
 import { signUpApi } from "../../api/api";
+import Loading from "../../components/Loading";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ function SignUp() {
 
     const [isClicked, setIsClicked] = useState(false);
     const [isSucceed, setIsSucceed] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSignUpButtonClicked = async () => {
         setUsernameError("");
@@ -47,6 +49,7 @@ function SignUp() {
             return;
         }
 
+        setIsLoading(true);
         //TODO: Sign up user
         try {
             const result = await signUpApi(username, password, email);
@@ -57,6 +60,8 @@ function SignUp() {
             console.log("Error signing up");
             setIsClicked(true);
             setIsSucceed(false);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -66,6 +71,7 @@ function SignUp() {
                 className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
+                {isLoading && <Loading />}
                 <div className="flex flex-col p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
                     <div className="pb-8 w-full">
                         <img

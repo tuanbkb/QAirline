@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/image/background.jpg";
 import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApi } from "../../api/api";
+import Loading from "../../components/Loading";
 
 function Login() {
     const navigate = useNavigate();
@@ -15,6 +16,8 @@ function Login() {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [loginError, setLoginError] = useState("");
+
+    const [isLoading, setIsLoading] = useState(false);
 
     // TODO: Implement this motherfucker
     const handleLoginButtonClicked = async (e) => {
@@ -32,6 +35,7 @@ function Login() {
 
         // TODO: Login user
         // setLoginError("No user. Are you dumb?");
+        setIsLoading(true);
         try {
             const { results } = await loginApi(email, password);
             console.log("Logged in");
@@ -42,6 +46,8 @@ function Login() {
         } catch (e) {
             console.log("Error: " + e);
             setLoginError("Invalid user!");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -51,6 +57,7 @@ function Login() {
                 className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
+                {isLoading && <Loading />}
                 <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
                     <div className="pb-8 w-full">
                         <img

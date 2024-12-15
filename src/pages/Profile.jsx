@@ -4,6 +4,7 @@ import { fetchUserData, putUserProfile } from "../api/api";
 import { getFormattedDate, convertToSendFormat } from "../utils/TimeFormat";
 import Calendar from "react-calendar";
 import CalendarPick from "../components/CalendarPick";
+import Loading from "../components/Loading";
 
 function Profile() {
     const [showCalendar, setShowCalendar] = useState(false);
@@ -32,6 +33,8 @@ function Profile() {
     useEffect(() => {
         getUserData();
     }, []);
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleConfirmButtonClicked = async () => {
         let error = false;
@@ -65,6 +68,7 @@ function Profile() {
             return;
         }
 
+        setIsLoading(true);
         // Call API to update user data
         try {
             const result = await putUserProfile({
@@ -80,11 +84,14 @@ function Profile() {
             console.error("Error updating user data:", error);
             setSucceed(false);
             setResult("Error updating user data");
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="max-w-6xl m-auto">
+            {isLoading && <Loading />}
             <h1 className="font-bold text-3xl text-theme-primary w-full text-center mb-4">
                 YOUR INFORMATION
             </h1>

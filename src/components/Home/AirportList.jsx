@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { fetchAllCities } from "../../api/api";
+import LoadingNoBg from "../LoadingNoBg";
 
 function AirportList({ chooseAirport, showAirportList }) {
     //NETWORK
     const [cities, setCities] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const getAllCities = async () => {
+        setIsLoading(true);
         const cities = await fetchAllCities();
+        setIsLoading(false);
         setCities(cities);
     };
 
     useEffect(() => {
-        if (cities.length === 0) {
-            getAllCities();
-        }
+        getAllCities();
     }, []);
 
     //UI LOGIC
@@ -42,8 +44,11 @@ function AirportList({ chooseAirport, showAirportList }) {
                     &times;
                 </span>
             </div>
-            <h2 className="font-bold text-theme-primary text-center text-xl">CHOOSE LOCATION</h2>
+            <h2 className="font-bold text-theme-primary text-center text-xl">
+                CHOOSE LOCATION
+            </h2>
             <ul className="flex flex-col h-96 py-4 overflow-y-scroll">
+                {isLoading && <LoadingNoBg />}
                 {cities.map((city) => (
                     <li
                         className="h-12 p-2 rounded-md hover:bg-theme-primaryContainer cursor-pointer flex"
@@ -53,7 +58,9 @@ function AirportList({ chooseAirport, showAirportList }) {
                         }}
                     >
                         <h3 className="grow">{city.cityName}</h3>
-                        <div className="rounded-md bg-theme-primary text-white font-bold w-10 p-1 text-center">{city.cityCode}</div>
+                        <div className="rounded-md bg-theme-primary text-white font-bold w-10 p-1 text-center">
+                            {city.cityCode}
+                        </div>
                     </li>
                 ))}
             </ul>

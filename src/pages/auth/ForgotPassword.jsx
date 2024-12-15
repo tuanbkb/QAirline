@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/image/background.jpg";
 import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { useState } from "react";
 import { forgotPasswordApi } from "../../api/api";
+import Loading from "../../components/Loading";
 
 function ForgotPassword() {
     const navigate = useNavigate();
@@ -11,16 +12,31 @@ function ForgotPassword() {
 
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
+    const [error, setError] = useState("");
+
+    const [result, setResult] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleSubmitButtonClicked = async () => {
         setEmailError("");
+        setError("");
         if (email.trim() === "") {
             setEmailError("Email can't be blank");
             return;
         }
 
         //TODO: Implement
-        const result = await forgotPasswordApi(email);
-        setSubmitted(true);
+        setIsLoading(true);
+        try {
+            const response = await forgotPasswordApi(email);
+            console.log(response);
+            setSubmitted(true);
+        } catch (e) {
+            console.log("Error: " + e);
+            setError("User not found!");
+        } finally {
+            setIsLoading(false);   
+        }
 
     }
 
@@ -30,7 +46,8 @@ function ForgotPassword() {
                 className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
-                <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl">
+                {isLoading && <Loading />}
+                <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl flex flex-col">
                     <div className="pb-8 w-full">
                         <img
                             className="m-auto h-[4rem]"
@@ -62,6 +79,7 @@ function ForgotPassword() {
                     >
                         Submit
                     </button>
+                    <span className="text-theme-error py-2 text-center">{error}</span>
                     <div className="my-4 text-center">
                         Suddenly remember your password?{" "}
                         <Link

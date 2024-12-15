@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/image/background.jpg";
 import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { useState } from "react";
 import { resetPasswordApi } from "../../api/api";
+import Loading from "../../components/Loading";
 
 function ResetPassword() {
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ function ResetPassword() {
 
     const [isClicked, setIsClicked] = useState(false);
     const [isSucceed, setIsSucceed] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleResetButtonClick = async () => {
         setNewPasswordError("");
@@ -42,6 +44,7 @@ function ResetPassword() {
             return;
         }
 
+        setIsLoading(true);
         //RESET PASSWORD
         console.log("click");
         try {
@@ -53,6 +56,8 @@ function ResetPassword() {
             setIsSucceed(true);
         } catch (error) {
             setIsSucceed(false);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -66,6 +71,7 @@ function ResetPassword() {
                 className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
+                {isLoading && <Loading />}
                 <div className="p-8 drop-shadow-xl max-w-max h-max bg-white rounded-xl flex flex-col">
                     <div className="pb-8 w-full">
                         <img

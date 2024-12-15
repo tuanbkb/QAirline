@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/image/background.jpg";
 import logo from "../../assets/image/QAirlineLogoFinal.png";
 import { changePasswordApi } from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function ChangePassword() {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ function ChangePassword() {
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     const [changePasswordError, setChangePasswordError] = useState("");
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const [changed, setChanged] = useState(false);
     const handleChangePasswordButtonClicked = async () => {
@@ -43,6 +46,7 @@ function ChangePassword() {
             return;
         }
 
+        setIsLoading(true);
         try {
             const response = await changePasswordApi({
                 oldPassword: oldPassword,
@@ -52,6 +56,8 @@ function ChangePassword() {
             setChanged(true);
         } catch (error) {
             setChangePasswordError("Your old password is incorrect!");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -68,12 +74,13 @@ function ChangePassword() {
                 className="flex items-center justify-center w-screen h-screen bg-cover bg-center"
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
-                <div className="p-8 flex flex-col drop-shadow-xl max-w-max h-max bg-white rounded-xl">
+                {isLoading && <Loading />}
+                <div className="p-8 flex flex-col drop-shadow-xl max-w-max h-max bg-white rounded-xl cursor-pointer">
                     <div className="pb-8 w-full">
                         <img
                             className="m-auto h-[4rem]"
                             src={logo}
-                            // onClick={handleImageClick}
+                            onClick={() => navigate("/")}
                         ></img>
                     </div>
                     {!changed ? (

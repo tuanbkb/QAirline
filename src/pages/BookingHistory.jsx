@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { fetchAllTickets } from "../api/api";
 import BookingHistoryCard from "../components/BookingHistory/BookingHistoryCard";
 import ResultDialog from "../components/BookingHistory/ResultDialog";
+import LoadingNoBg from "../components/LoadingNoBg";
 
 function BookingHistory() {
     const [tickets, setTickets] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const getTickets = async () => {
+        setIsLoading(true);
         const tickets = await fetchAllTickets();
-        console.log(tickets);
+        setIsLoading(false);
         setTickets(tickets);
     };
 
@@ -26,6 +30,7 @@ function BookingHistory() {
                 YOUR BOOKING HISTORY
             </h1>
             <div className="h-10"></div>
+            {isLoading && <LoadingNoBg />}
             {tickets.map((ticket) => (
                 <BookingHistoryCard
                     ticket={ticket}

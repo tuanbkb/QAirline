@@ -9,6 +9,7 @@ import FillDetailsTextField from "../FillDetails/FillDetailsTextField";
 import { putTicket, deleteTicket, postPayTicket } from "../../api/api";
 import Checkbox from "../Checkbox";
 import PaymentMethodPicker from "../Checkout/PaymentMethodPicker";
+import Loading from "../Loading";
 
 function BookingHistoryCard({
     ticket,
@@ -83,6 +84,8 @@ function BookingHistoryCard({
         return result;
     };
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleChangeButtonClicked = async () => {
         setNameError("");
         setDobError("");
@@ -131,7 +134,7 @@ function BookingHistoryCard({
         }
 
         if (!error) {
-            console.log("Change confirmed");
+            setIsLoading(true);
             try {
                 const res = await modifyTicket();
                 console.log(seatType);
@@ -148,12 +151,14 @@ function BookingHistoryCard({
                 setIsSucceed(false);
                 setIsModify(true);
                 setShowResultDialog(true);
+            } finally {
+                setIsLoading(false);
             }
         }
     };
 
     const handleCancelButtonClicked = async () => {
-        console.log("Cancel confirmed");
+        setIsLoading(true);
         try {
             const res = await cancelTicket(ticket.id);
             setIsSucceed(true);
@@ -164,11 +169,14 @@ function BookingHistoryCard({
             setIsSucceed(false);
             setIsModify(false);
             setShowResultDialog(true);
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="border-2 rounded-xl shadow-md flex flex-col cursor-pointer my-4">
+            {isLoading && <Loading />}
             <div
                 className="flex p-2"
                 onClick={() => {

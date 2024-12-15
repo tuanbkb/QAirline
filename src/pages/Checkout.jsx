@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PaymentMethodPicker from "../components/Checkout/PaymentMethodPicker";
 import { postPayTicket, postTicket } from "../api/api";
 import { convertToSendFormat } from "../utils/TimeFormat";
+import Loading from "../components/Loading";
 
 function Checkout() {
     const navigate = useNavigate();
@@ -19,9 +20,10 @@ function Checkout() {
     const email = states.email;
     const phone = states.phone;
 
-    console.log(dob);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleButtonClicked = async () => {
+        setIsLoading(true);
         try {
             const result = await postTicket({
                 flight: flight.id,
@@ -43,11 +45,14 @@ function Checkout() {
         } catch (error) {
             console.error(error);
             navigate("/bookingresult", { state: { isSucceed: false } });
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="max-w-6xl m-auto">
+            {isLoading && <Loading />}
             <h1 className="w-full text-center font-bold text-3xl text-theme-primary">
                 CONFIRM YOUR ORDER
             </h1>
