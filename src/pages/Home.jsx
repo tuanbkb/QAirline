@@ -18,7 +18,6 @@ import Checkout from "./Checkout";
 import Profile from "./Profile";
 import BookingHistory from "./BookingHistory";
 import Footer from "../components/Footer/Footer";
-import { Helmet } from "react-helmet";
 
 function Home() {
     const location = useLocation();
@@ -55,9 +54,16 @@ function Home() {
                 style={{ backgroundImage: `url(${background})` }}
             ></div> */}
             <div className="px-2 min-h-[calc(100vh-356px)]">
-                
                 <Routes>
-                    <Route path="/" element={<BookFlight />} />
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <BookFlight />
+                                {/* ADD SOME GIBBERISH HERE */}
+                            </>
+                        }
+                    />
                     <Route path="/explore" element={<Explore />} />
                     <Route
                         path="/explore/:destinationId"
