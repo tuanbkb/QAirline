@@ -17,16 +17,18 @@ import DestinationDetails from "./Destinations/DestinationDetails";
 import Checkout from "./Checkout";
 import Profile from "./Profile";
 import BookingHistory from "./BookingHistory";
+import Footer from "../components/Footer/Footer";
 
 function Home() {
     return (
-        <>
+        <div className="min-h-screen">
             <Header />
-            <div
+            <div className="h-20"></div>
+            {/* <div
                 className="w-screen h-60 bg-cover bg-bottom mb-10 mt-4"
                 style={{ backgroundImage: `url(${background})` }}
-            ></div>
-            <div className="px-2">
+            ></div> */}
+            <div className="px-2 min-h-[calc(100vh-356px)]">
                 <Routes>
                     <Route path="/" element={<BookFlight />} />
                     <Route path="/explore" element={<Explore />} />
@@ -58,7 +60,9 @@ function Home() {
                     />
                 </Routes>
             </div>
-        </>
+            <div className="h-20"></div>
+            <Footer />
+        </div>
     );
 }
 
