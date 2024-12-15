@@ -22,7 +22,7 @@ function FlightCard({ flight }) {
     const navigate = useNavigate();
 
     return (
-        <div className="border-2 rounded-xl shadow-md w-full my-4 flex">
+        <div className="border-2 rounded-xl shadow-md w-full my-4 flex max-lg:flex-col">
             <div className="p-2 basis-1/3 border-r-2 flex justify-center">
                 <div className="flex flex-col items-center justify-center">
                     <div className="">{getFormattedDate(departure)}</div>
@@ -40,7 +40,7 @@ function FlightCard({ flight }) {
                     <div className="">{to}</div>
                 </div>
             </div>
-            <div className="p-2 basis-1/3 flex flex-col justify-center items-center">
+            <div className="p-2 basis-1/3 flex flex-col justify-center items-center max-lg:border-t-2">
                 <h3 className="">
                     Flight Duration:{" "}
                     <strong>{calculateDuration(departure, arrival)}</strong>
@@ -49,39 +49,43 @@ function FlightCard({ flight }) {
                     {id} by {plane}
                 </h3>
             </div>
-            <div
-                className="bg-theme-primary p-2 basis-1/6 flex flex-col items-center cursor-pointer"
-                onClick={() =>
-                    navigate("/shoppingcart", {
-                        state: { flight: flight, isEconomy: true },
-                    })
-                }
-            >
-                <label className="text-white font-bold text-sm">ECONOMY</label>
-                <div className="h-2"></div>
-                <h3 className="text-white font-bold text-4xl">
-                    {economyPrice}
-                </h3>
-                <h4 className="text-white font-bold">USD</h4>
-                <h4 className="text-white text-sm">
-                    <strong>{availableEconomySeats}</strong> remaining
-                </h4>
-            </div>
-            <div
-                className="bg-theme-inversePrimary p-2 basis-1/6 flex flex-col items-center rounded-r-xl cursor-pointer"
-                onClick={() =>
-                    navigate("/shoppingcart", {
-                        state: { flight: flight, isEconomy: false }
-                    })
-                }
-            >
-                <label className="font-bold text-sm">BUSINESS</label>
-                <div className="h-2"></div>
-                <h3 className="font-bold text-4xl">{businessPrice}</h3>
-                <h4 className="font-bold">USD</h4>
-                <h4 className="text-sm">
-                    <strong>{availableBusinessSeats}</strong> remaining
-                </h4>
+            <div className="flex basis-1/3">
+                <div
+                    className="bg-theme-primary p-2 flex flex-col items-center cursor-pointer grow"
+                    onClick={() =>
+                        navigate("/shoppingcart", {
+                            state: { flight: flight, isEconomy: true },
+                        })
+                    }
+                >
+                    <label className="text-white font-bold text-sm">
+                        ECONOMY
+                    </label>
+                    <div className="h-2"></div>
+                    <h3 className="text-white font-bold text-4xl">
+                        {economyPrice}
+                    </h3>
+                    <h4 className="text-white font-bold">USD</h4>
+                    <h4 className="text-white text-sm">
+                        <strong>{availableEconomySeats}</strong> remaining
+                    </h4>
+                </div>
+                <div
+                    className="bg-theme-inversePrimary p-2 flex flex-col items-center rounded-r-xl cursor-pointer grow"
+                    onClick={() =>
+                        navigate("/shoppingcart", {
+                            state: { flight: flight, isEconomy: false },
+                        })
+                    }
+                >
+                    <label className="font-bold text-sm">BUSINESS</label>
+                    <div className="h-2"></div>
+                    <h3 className="font-bold text-4xl">{businessPrice}</h3>
+                    <h4 className="font-bold">USD</h4>
+                    <h4 className="text-sm">
+                        <strong>{availableBusinessSeats}</strong> remaining
+                    </h4>
+                </div>
             </div>
         </div>
     );
