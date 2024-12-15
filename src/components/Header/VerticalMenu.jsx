@@ -22,6 +22,10 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
         setIsVerticalMenuOpen(false);
         navigate("/profile");
     };
+    const handleChangePasswordClicked = () => {
+        setIsVerticalMenuOpen(false);
+        navigate("/changepassword");
+    };
     const handleSignOutClicked = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
@@ -284,6 +288,12 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                                 onClick={handleProfileClicked}
                             >
                                 Profile
+                            </li>
+                            <li
+                                className="font-bold p-2 cursor-pointer hover:bg-slate-200"
+                                onClick={handleChangePasswordClicked}
+                            >
+                                Change Password
                             </li>
                             <li
                                 className="font-bold p-2 cursor-pointer hover:bg-slate-200"

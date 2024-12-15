@@ -284,6 +284,17 @@ export const resetPasswordApi = async (data) => {
   }
 }
 
+export const changePasswordApi = async (data) => {
+  try {
+    const response = await apiClient.put("/api/customer/v1/change_password", data);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("Error changing password:", error);
+    throw error;
+  }
+}
+
 export const putUserProfile = async (data) => {
   try {
     const response = await apiClient.put("/api/customer/v1/edit", data);

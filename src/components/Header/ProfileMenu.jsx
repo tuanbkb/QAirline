@@ -9,6 +9,9 @@ function ProfileMenu() {
     const handleProfileClicked = () => {
         navigate("/profile");
     };
+    const handleChangePasswordClicked = () => {
+        navigate("/changepassword");
+    };
     const handleSignOutClicked = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
@@ -36,6 +39,12 @@ function ProfileMenu() {
                     onClick={handleProfileClicked}
                 >
                     Profile
+                </div>
+                <div
+                    className="p-2 font-bold hover:bg-theme-primaryContainer hover:cursor-pointer"
+                    onClick={handleChangePasswordClicked}
+                >
+                    Change Password
                 </div>
                 <div
                     className="p-2 font-bold hover:bg-theme-primaryContainer hover:cursor-pointer"
