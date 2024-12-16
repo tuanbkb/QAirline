@@ -19,7 +19,7 @@ function CalendarPick({ chooseDate, setShowCalendar }) {
     };
 
     return (
-        <div className="absolute w-6xl" >
+        <div className="absolute w-6xl z-10" >
             <div className="border shadow-md p-2 w-96 bg-white rounded-xl">
                 <div className="flex px-2">
                     <div className="grow"></div>

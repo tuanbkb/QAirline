@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -76,54 +76,62 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                     >
                         <div className="flex flex-col mb-4">
                             <h2 className="font-bold">Destination</h2>
-                            <a
+                            <Link
                                 className="py-2 hover:underline"
-                                href="/explore/0"
+                                to="/explore/0"
+                                onClick={() => setIsVerticalMenuOpen(false)}
                             >
                                 Ha Noi
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 className="py-2 hover:underline"
-                                href="/explore/1"
+                                to="/explore/1"
+                                onClick={() => setIsVerticalMenuOpen(false)}
                             >
                                 Ho Chi Minh City
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 className="py-2 hover:underline"
-                                href="/explore/2"
+                                to="/explore/2"
+                                onClick={() => setIsVerticalMenuOpen(false)}
                             >
                                 Ha Long Bay
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 className="py-2 hover:underline"
-                                href="/explore/3"
+                                to="/explore/3"
+                                onClick={() => setIsVerticalMenuOpen(false)}
                             >
                                 Hoi An
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 className="py-2 hover:underline"
-                                href="/explore/11"
+                                to="/explore/11"
+                                onClick={() => setIsVerticalMenuOpen(false)}
                             >
                                 Hue
-                            </a>
-                        </div>
-                        <div className="flex flex-col">
-                            <h2 className="font-bold">Flight</h2>
-                            <a className="py-2 hover:underline" href="">
-                                Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
-                                Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
-                                Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
-                                Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
-                                Info
-                            </a>
+                            </Link>
+                            <Link
+                                className="py-2 hover:underline"
+                                to="/explore/5"
+                                onClick={() => setIsVerticalMenuOpen(false)}
+                            >
+                                Kyoto
+                            </Link>
+                            <Link
+                                className="py-2 hover:underline"
+                                to="/explore/19"
+                                onClick={() => setIsVerticalMenuOpen(false)}
+                            >
+                                Bangkok
+                            </Link>
+                            <Link
+                                className="py-2 hover:underline"
+                                to="/explore/6"
+                                onClick={() => setIsVerticalMenuOpen(false)}
+                            >
+                                Paris
+                            </Link>
                         </div>
                     </motion.div>
                 )}
@@ -154,39 +162,39 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                     >
                         <div className="flex flex-col mb-4">
                             <h2 className="font-bold">Special Services</h2>
-                            <a className="py-2 hover:underline" href="">
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
+                            </Link>
                         </div>
                         <div className="flex flex-col">
                             <h2 className="font-bold">Procedure Guide</h2>
-                            <a className="py-2 hover:underline" href="">
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Info
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
                 )}
@@ -217,39 +225,39 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                     >
                         <div className="flex flex-col mb-4">
                             <h2 className="font-bold">News</h2>
-                            <a className="py-2 hover:underline" href="">
+                            <Link className="py-2 hover:underline" to="">
                                 News
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 News
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 News
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 News
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 News
-                            </a>
+                            </Link>
                         </div>
                         <div className="flex flex-col">
                             <h2 className="font-bold">Offers</h2>
-                            <a className="py-2 hover:underline" href="">
+                            <Link className="py-2 hover:underline" to="">
                                 Offer
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Offer
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Offer
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Offer
-                            </a>
-                            <a className="py-2 hover:underline" href="">
+                            </Link>
+                            <Link className="py-2 hover:underline" to="">
                                 Offer
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
                 )}

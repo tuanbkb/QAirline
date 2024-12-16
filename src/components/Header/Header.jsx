@@ -43,9 +43,9 @@ function Header() {
 
   return (
     <>
-      <header className="flex items-center justify-between max-w-6xl m-auto pt-4 px-2 border-b border-gray-400">
+      <header className="flex items-center justify-between max-w-6xl m-auto pt-4 px-2 ">
         <div
-          className="cursor-pointer h-[2.5rem] flex items-center justify-center"
+          className="cursor-pointer h-[4rem] flex items-center justify-center"
           onClick={handleImageClick}
         >
           <img className="h-full" src={logo}></img>
@@ -54,7 +54,7 @@ function Header() {
           className="text-xl max-lg:hidden"
           onMouseEnter={() => setIsMenuOpen(true)}
         >
-          <ul className="flex">
+          <ul className="flex font-bold">
             <li
               className="p-4 hover:text-theme-primary cursor-pointer"
               onMouseEnter={() => {
@@ -124,11 +124,11 @@ function Header() {
           <span className="border-2 border-theme-primary w-10"></span>
         </div>
       </header>
-      {/* {isMenuOpen && (
+      {isMenuOpen && (
         <div onMouseLeave={() => setIsMenuOpen(false)}>
           <DropDownMenu type={menuType} />
         </div>
-      )} */}
+      )}
       {isVerticalMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden">
           <VerticalMenu

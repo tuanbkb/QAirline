@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import background from "../assets/image/background.jpg";
+import { Route, Routes, useLocation } from "react-router-dom";
 import BookFlight from "../components/Home/BookFlight";
 import Header from "../components/Header/Header";
 import { useEffect } from "react";
@@ -86,7 +85,8 @@ function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="px-2 min-h-[calc(100vh-356px)]">
+      <div className="h-5"></div>
+      <div className="px-2 min-h-[calc(100vh-256px)]">
         <Routes>
           <Route
             path="/"
@@ -94,7 +94,7 @@ function Home() {
               <div className="m-auto">
                 <div className="h-5"></div>
                 <BookFlight />
-                <div className="m-auto text-center my-5 text-2xl">
+                <div className="m-auto text-center my-5 text-3xl font-bold text-theme-primary">
                   Recommended destinations
                 </div>
                 <Carousel
@@ -137,7 +137,7 @@ function Home() {
           <Route path="/bookinghistory" element={<BookingHistory />} />
         </Routes>
       </div>
-      <div className="h-20"></div>
+      <div className="h-10"></div>
       <Footer />
     </div>
   );

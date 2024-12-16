@@ -17,10 +17,10 @@ export default function DestinationDetails() {
 
   useEffect(() => {
     getDestination();
-  }, []);
+  }, [destinationId]);
 
   return (
-    <div className="max-w-5xl m-auto">
+    <div className="max-w-6xl m-auto">
       <img
         src={destination.image}
         alt="Image"

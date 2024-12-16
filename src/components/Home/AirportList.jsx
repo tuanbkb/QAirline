@@ -34,7 +34,7 @@ function AirportList({ chooseAirport, showAirportList }) {
     // const [airportRegion, setAirportRegion] = useState("Vietnam");
 
     return (
-        <div className="shadow-md rounded-xl w-96 border px-4 py-2 absolute bg-white">
+        <div className="z-10 shadow-md rounded-xl w-96 border px-4 py-2 absolute bg-white">
             <div className="flex">
                 <div className="grow"></div>
                 <span

@@ -39,6 +39,7 @@ function BookingHistory() {
                     setShowResultDialog={setShowResultDialog}
                 />
             ))}
+            {!isLoading && tickets.length === 0 && <h2 className="font-bold text-center text-2xl text-theme-primary">You haven't made any purchase.</h2>}
             {showResultDialog && (
                 <div className="fixed flex justify-center items-center z-10 bg-black bg-opacity-50 inset-0">
                     <ResultDialog

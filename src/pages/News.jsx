@@ -23,9 +23,9 @@ const NewsPage = () => {
   };
 
   return (
-    <div className="flex justify-center mt-5">
-      <div className="w-[70vw]">
-        <h1 className="mt-4 text-2xl text-grey-800">NEWS & OFFERS</h1>
+    <div className="flex justify-center">
+      <div className="max-w-6xl">
+        <h1 className="mt-4 text-3xl text-theme-primary font-bold text-center">NEWS & OFFERS</h1>
         <div className=" grid grid-cols-2 gap-5 mt-5">
           {newsList.map((news, index) => (
             <RectangleCard

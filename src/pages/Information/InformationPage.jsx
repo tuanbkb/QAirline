@@ -26,8 +26,8 @@ export default function InformationPage() {
     },
   ];
   return (
-    <div className="w-[70vw] m-auto">
-      <h1 className="mt-4 text-2xl text-theme-onPrimaryContainer">
+    <div className="max-w-6xl m-auto">
+      <h1 className="mt-4 text-3xl text-theme-primary text-center font-bold">
         TRAVEL INFORMATION
       </h1>
       <div className="grid grid-cols-2 gap-5 mt-5">
