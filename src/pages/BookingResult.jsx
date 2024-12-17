@@ -7,7 +7,7 @@ function BookingResult() {
     const isSucceed = states.isSucceed;
 
     return (
-        <div className="w-max m-auto">
+        <div className="w-max max-w-full m-auto">
             <BookingResultDialog isSucceed={isSucceed}/>
         </div>
     );

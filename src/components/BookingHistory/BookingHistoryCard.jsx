@@ -146,6 +146,8 @@ function BookingHistoryCard({
                 setIsSucceed(true);
                 setIsModify(true);
                 setShowResultDialog(true);
+                setModifyShow(false);
+                setOptionShow(false);
             } catch (error) {
                 console.error("Error modifying ticket:", error);
                 setIsSucceed(false);
@@ -178,21 +180,21 @@ function BookingHistoryCard({
         <div className="border-2 rounded-xl shadow-md flex flex-col cursor-pointer my-4">
             {isLoading && <Loading />}
             <div
-                className="flex p-2"
+                className="flex p-2 max-lg:flex-col"
                 onClick={() => {
                     setOptionShow(!optionShow);
                     setModifyShow(false);
                     setConfirmShow(false);
                 }}
             >
-                <div className="flex flex-col px-2 border-r-2 grow">
+                <div className="flex flex-col px-2 border-r-2 grow max-lg:border-r-0">
                     <h3 className="font-bold">{ticket.name}</h3>
                     <h3 className="">{ticket.birthday}</h3>
                     <h3 className="">{ticket.address}</h3>
                     <h3 className="">{ticket.email}</h3>
                     <h3 className="">{ticket.phone}</h3>
                 </div>
-                <div className="flex flex-col px-2 border-r-2 grow">
+                <div className="flex flex-col px-2 border-r-2 grow max-lg:border-t-2 max-lg:border-r-0">
                     <h3 className="font-bold">{flightNumber}</h3>
                     <h3 className="font-bold">
                         {fromCity} - {toCity}
@@ -204,7 +206,7 @@ function BookingHistoryCard({
                         Arrive: <strong>{arrival}</strong>
                     </h3>
                 </div>
-                <div className="flex flex-col px-2 items-end grow">
+                <div className="flex flex-col px-2 items-end grow max-lg:border-t-2">
                     <h3 className="">
                         Seat: <strong>{seat}</strong>
                     </h3>

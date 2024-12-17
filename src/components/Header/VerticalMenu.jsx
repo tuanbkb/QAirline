@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function VerticalMenu({ setIsVerticalMenuOpen, username }) {
-    const [exploreSubMenu, setExploreSubMenu] = useState(false);
-    const [infoSubMenu, setInfoSubMenu] = useState(false);
-    const [newsSubMenu, setNewsSubMenu] = useState(false);
-    const [isExploreArrowDown, setIsExploreArrowDown] = useState(true);
-    const [isInfoArrowDown, setIsInfoArrowDown] = useState(true);
-    const [isNewsArrowDown, setIsNewsArrowDown] = useState(true);
+    // const [exploreSubMenu, setExploreSubMenu] = useState(false);
+    // const [infoSubMenu, setInfoSubMenu] = useState(false);
+    // const [newsSubMenu, setNewsSubMenu] = useState(false);
+    // const [isExploreArrowDown, setIsExploreArrowDown] = useState(true);
+    // const [isInfoArrowDown, setIsInfoArrowDown] = useState(true);
+    // const [isNewsArrowDown, setIsNewsArrowDown] = useState(true);
 
     const [profileSubMenu, setProfileSubMenu] = useState(false);
     const [isProfileArrowDown, setIsProfileArrowDown] = useState(true);
@@ -51,24 +51,21 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
             <ul className="p-4 grow overflow-scroll">
                 <li
                     className="flex mb-2 border-b-2 py-4"
-                    onClick={() => {
-                        setIsExploreArrowDown(!isExploreArrowDown);
-                        setExploreSubMenu(!exploreSubMenu);
-                    }}
+                    // onClick={() => {
+                    //     setIsExploreArrowDown(!isExploreArrowDown);
+                    //     setExploreSubMenu(!exploreSubMenu);
+                    // }}
                 >
                     <Link
                         to="/explore"
-                        className="text-theme-primary font-bold cursor-pointer text-2xl"
+                        className="text-theme-primary font-bold cursor-pointer text-2xl grow"
                         onClick={() => setIsVerticalMenuOpen(false)}
                     >
                         Explore
                     </Link>
-                    <div className="grow"></div>
-                    <span className="text-theme-primary">
-                        {isExploreArrowDown ? <>&#9660;</> : <>&#9650;</>}
-                    </span>
+                    {/* <div className="grow"></div> */}
                 </li>
-                {exploreSubMenu && (
+                {/* {exploreSubMenu && (
                     <motion.div
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -134,27 +131,24 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                             </Link>
                         </div>
                     </motion.div>
-                )}
+                )} */}
                 <li
                     className="flex mb-2 border-b-2 py-4"
-                    onClick={() => {
-                        setIsInfoArrowDown(!isInfoArrowDown);
-                        setInfoSubMenu(!infoSubMenu);
-                    }}
+                    // onClick={() => {
+                    //     setIsInfoArrowDown(!isInfoArrowDown);
+                    //     setInfoSubMenu(!infoSubMenu);
+                    // }}
                 >
                     <Link
                         to="/info"
-                        className="text-theme-primary font-bold cursor-pointer text-2xl"
+                        className="text-theme-primary font-bold cursor-pointer text-2xl grow"
                         onClick={() => setIsVerticalMenuOpen(false)}
                     >
                         Travel Information
                     </Link>
-                    <div className="grow"></div>
-                    <span className="text-theme-primary">
-                        {isInfoArrowDown ? <>&#9660;</> : <>&#9650;</>}
-                    </span>
+                    {/* <div className="grow"></div> */}
                 </li>
-                {infoSubMenu && (
+                {/* {infoSubMenu && (
                     <motion.div
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -197,27 +191,24 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                             </Link>
                         </div>
                     </motion.div>
-                )}
+                )} */}
                 <li
                     className="flex mb-2 border-b-2 py-4"
-                    onClick={() => {
-                        setIsNewsArrowDown(!isNewsArrowDown);
-                        setNewsSubMenu(!newsSubMenu);
-                    }}
+                    // onClick={() => {
+                    //     setIsNewsArrowDown(!isNewsArrowDown);
+                    //     setNewsSubMenu(!newsSubMenu);
+                    // }}
                 >
                     <Link
                         to="/news"
-                        className="text-theme-primary font-bold cursor-pointer text-2xl"
+                        className="text-theme-primary font-bold cursor-pointer text-2xl grow"
                         onClick={() => setIsVerticalMenuOpen(false)}
                     >
                         News & Offers
                     </Link>
-                    <div className="grow"></div>
-                    <span className="text-theme-primary">
-                        {isNewsArrowDown ? <>&#9660;</> : <>&#9650;</>}
-                    </span>
+                    {/* <div className="grow"></div> */}
                 </li>
-                {newsSubMenu && (
+                {/* {newsSubMenu && (
                     <motion.div
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -260,7 +251,7 @@ function VerticalMenu({ setIsVerticalMenuOpen, username }) {
                             </Link>
                         </div>
                     </motion.div>
-                )}
+                )} */}
             </ul>
             <div className="p-4 bg-gray-300">
                 <div

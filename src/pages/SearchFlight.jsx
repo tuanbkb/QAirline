@@ -118,9 +118,9 @@ function SearchFlight() {
                 SEARCH RESULT
             </h1>
             <div className="h-10"></div>
-            <div className="border-2 shadow-md flex p-4 rounded-xl">
-                <div className="flex grow justify-center px-2">
-                    <div className="flex flex-col items-center ">
+            <div className="border-2 shadow-md flex p-4 rounded-xl max-sm:flex-col">
+                <div className="flex grow justify-center px-2 border-r-2 max-sm:border-r-0 max-sm:border-b-2">
+                    <div className="flex flex-col items-center">
                         <h3 className="font-bold text-xl">{fromCityCode}</h3>
                         <h4 className="">{fromCityName}</h4>
                     </div>
@@ -130,7 +130,6 @@ function SearchFlight() {
                         <h4 className="">{toCityName}</h4>
                     </div>
                 </div>
-                <div className="border"></div>
                 <div className="flex grow justify-center px-2">
                     <div className="flex flex-col items-center">
                         <h3 className="font-bold text-xl">Depart</h3>

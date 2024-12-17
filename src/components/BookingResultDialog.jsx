@@ -7,7 +7,7 @@ function BookingResultDialog({ isSucceed }) {
     };
 
     return (
-        <div className="border-2 rounded-xl shadow-md p-4 max-w-max">
+        <div className="border-2 rounded-xl shadow-md p-4">
             {isSucceed ? (
                 <div>
                     <h1 className="text-theme-primary text-2xl font-bold">
