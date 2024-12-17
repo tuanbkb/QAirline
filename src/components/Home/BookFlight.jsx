@@ -34,10 +34,10 @@ function BookFlight() {
   const onSearchFlightButtonClicked = () => {
     setBookingError("");
     let error = false;
-    if (depart === "") {
-      setBookingError("Departing date can't be blank");
-      error = true;
-    }
+    // if (depart === "") {
+    //   setBookingError("Departing date can't be blank");
+    //   error = true;
+    // }
     if (to === "") {
       setBookingError("Destination city can't be blank");
       error = true;
