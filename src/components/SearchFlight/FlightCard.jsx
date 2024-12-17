@@ -6,6 +6,7 @@ import {
     formatDate,
     getCorrectJSTime,
 } from "../../utils/TimeFormat";
+import PlaneIcon from "../PlaneIcon";
 
 function FlightCard({ flight }) {
     const from = flight.originAirport.airportName;
@@ -24,17 +25,15 @@ function FlightCard({ flight }) {
     return (
         <div className="border-2 rounded-xl shadow-md w-full my-4 flex max-lg:flex-col">
             <div className="p-2 basis-1/3 border-r-2 flex justify-center">
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center text-center">
                     <div className="">{getFormattedDate(departure)}</div>
                     <div className="font-bold">{formatTime(departure)}</div>
                     <div className="">{from}</div>
                 </div>
                 <div className="flex flex-col justify-center p-4">
-                    <span className="text-theme-primary font-bold">
-                        {"--------->"}
-                    </span>
+                    <PlaneIcon />
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center text-center">
                     <div className="">{getFormattedDate(arrival)}</div>
                     <div className="font-bold">{formatTime(arrival)}</div>
                     <div className="">{to}</div>
@@ -51,12 +50,18 @@ function FlightCard({ flight }) {
             </div>
             <div className="flex basis-1/3">
                 <div
-                    className="bg-theme-primary p-2 flex flex-col items-center cursor-pointer grow"
-                    onClick={() =>
-                        navigate("/shoppingcart", {
-                            state: { flight: flight, isEconomy: true },
-                        })
-                    }
+                    className={`bg-theme-primary p-2 flex flex-col items-center ${
+                        availableEconomySeats !== 0 && "cursor-pointer"
+                    } grow ${
+                        availableEconomySeats === 0 &&
+                        "opacity-50 cursor-not-allowed"
+                    }`}
+                    onClick={() => {
+                        if (availableEconomySeats !== 0)
+                            navigate("/shoppingcart", {
+                                state: { flight: flight, isEconomy: true },
+                            });
+                    }}
                 >
                     <label className="text-white font-bold text-sm">
                         ECONOMY
@@ -71,12 +76,19 @@ function FlightCard({ flight }) {
                     </h4>
                 </div>
                 <div
-                    className="bg-theme-inversePrimary p-2 flex flex-col items-center rounded-r-xl cursor-pointer grow"
-                    onClick={() =>
-                        navigate("/shoppingcart", {
-                            state: { flight: flight, isEconomy: false },
-                        })
-                    }
+                    className={`bg-theme-inversePrimary p-2 flex flex-col items-center rounded-r-xl ${
+                        availableBusinessSeats !== 0 && "cursor-pointer"
+                    } ${
+                        availableBusinessSeats === 0 &&
+                        "cursor-not-allowed opacity-50"
+                    } grow`}
+                    onClick={() => {
+                        if (availableBusinessSeats !== 0) {
+                            navigate("/shoppingcart", {
+                                state: { flight: flight, isEconomy: false },
+                            });
+                        }
+                    }}
                 >
                     <label className="font-bold text-sm">BUSINESS</label>
                     <div className="h-2"></div>

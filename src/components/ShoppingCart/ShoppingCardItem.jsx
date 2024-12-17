@@ -1,4 +1,5 @@
 import { formatDate, formatTime, calculateDuration, getCorrectJSTime, getFormattedDate } from "../../utils/TimeFormat"
+import PlaneIcon from "../PlaneIcon";
 
 function ShoppingCartItem({ flight, isEconomy }) {
     const from = flight.originAirport.airportName;
@@ -21,17 +22,15 @@ function ShoppingCartItem({ flight, isEconomy }) {
             </div>
             <div className="py-2 flex max-sm:flex-col">
                 <div className="basis-1/2 border-r-2 p-2 flex justify-center max-sm:border-b-2">
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center text-center">
                         <div className="">{getFormattedDate(departure)}</div>
                         <div className="font-bold">{formatTime(departure)}</div>
                         <div className="">{from}</div>
                     </div>
                     <div className="flex flex-col justify-center p-4">
-                        <span className="text-theme-primary font-bold">
-                            {"--------->"}
-                        </span>
+                        <PlaneIcon />
                     </div>
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center text-center">
                         <div className="">{getFormattedDate(arrival)}</div>
                         <div className="font-bold">{formatTime(arrival)}</div>
                         <div className="">{to}</div>

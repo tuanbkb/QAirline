@@ -229,7 +229,7 @@ function BookingHistoryCard({
                     </h3>
                     <div className="flex border-t-2 font-bold">
                         <button
-                            className="grow p-2 text-center text-theme-primary hover:bg-theme-primaryContainer disabled:bg-gray-200 disabled:text-opacity-20 disabled:hover:text-opacity-20 cursor-not-allowed"
+                            className="grow p-2 text-center text-theme-primary hover:bg-theme-primaryContainer disabled:bg-gray-200 disabled:text-opacity-20 disabled:hover:text-opacity-20 disabled:cursor-not-allowed"
                             onClick={() => {
                                 setModifyShow(!modifyShow);
                                 setConfirmShow(false);
@@ -239,7 +239,7 @@ function BookingHistoryCard({
                             MODIFY
                         </button>
                         <button
-                            className="grow p-2 text-center bg-theme-error text-white hover:bg-theme-onErrorContainer rounded-br-lg disabled:bg-opacity-20 disabled:hover:bg-theme-error disabled:hover:bg-opacity-20 cursor-not-allowed"
+                            className="grow p-2 text-center bg-theme-error text-white hover:bg-theme-onErrorContainer rounded-br-lg disabled:bg-opacity-20 disabled:hover:bg-theme-error disabled:hover:bg-opacity-20 disabled:cursor-not-allowed"
                             onClick={() => {
                                 setConfirmShow(!confirmShow);
                                 setModifyShow(false);
