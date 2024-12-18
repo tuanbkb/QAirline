@@ -3,9 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getNewsByFolder } from "../../../api/api";
 import RectangleCard from "../../../components/RectangleCard";
 import { CircularProgress } from "@mui/material";
+import BackButton from "../../../components/BackButton";
 
 export default function InformationCategory() {
   const [informationList, setInformationList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { folder } = useParams();
   const navigate = useNavigate();
 
@@ -14,14 +16,27 @@ export default function InformationCategory() {
       const data = await getNewsByFolder(folder);
       setInformationList(data.results);
     };
-    fetchInformation();
+    setIsLoading(true);
+    fetchInformation().then((res) => {
+      setIsLoading(false);
+    });
   }, []);
 
-  if (informationList.length === 0) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[89vh] gap-2">
         <CircularProgress sx={{ color: "#69548D" }} />
         <div className="text-gray-600 text-lg">Loading...</div>
+      </div>
+    );
+  }
+  if (informationList.length === 0) {
+    return (
+      <div className="max-w-4xl m-auto">
+        <BackButton />
+        <div className="text-gray-600 text-lg">
+          There is no information on this category
+        </div>
       </div>
     );
   }

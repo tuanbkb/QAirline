@@ -15,39 +15,58 @@ function DropDownMenu(props) {
         >
           <div className="flex justify-center gap-20">
             <div className="flex flex-col">
-              <h2 className="font-bold">Special Services</h2>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link className="font-bold hover:underline" to="/info/check-in">
+                Check-in
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/check-in/673cba65a356542ade3804cc"
+              >
+                Online check-in
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/check-in/674ed566d7ee8c14add2b63c"
+              >
+                Kiosk check-in
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
-              </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/check-in/67556ce866022363084699ff"
+              >
+                Airport check-in
               </Link>
             </div>
             <div className="flex flex-col">
-              <h2 className="font-bold">Procedure Guide</h2>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <h2 className="font-bold">Baggage</h2>
+              <Link
+                className="py-2 hover:underline"
+                to="/info/baggage/67556db66602236308469a00"
+              >
+                Hand luggage
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+            </div>
+            <div className="flex flex-col">
+              <Link className="font-bold hover:underline" to="/info/check-in">
+                Travel guide
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/travel-guide/67603cf629104878ea08a4f4"
+              >
+                For Vietnam domestic flights
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/travel-guide/67603d4e29104878ea08a4f5"
+              >
+                For flights to Vietnam
               </Link>
-              <Link className="py-2 hover:underline" to="">
-                Info
+              <Link
+                className="py-2 hover:underline"
+                to="/info/travel-guide/67603daf29104878ea08a4f6"
+              >
+                For flights from Vietnam to other countries
               </Link>
             </div>
           </div>

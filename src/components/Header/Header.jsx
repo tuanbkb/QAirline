@@ -23,6 +23,17 @@ function Header() {
   //   setIsProfileMenuOpen(false);
   // };
 
+  // const [newsList, setNewsList] = useState([]);
+
+  // const fetchNews = async () => {
+  //   try {
+  //     const response = await getAllNews();
+  //     setNewsList(response.results);
+  //   } catch (error) {
+  //     toast.error(error.response.data.message);
+  //   }
+  // };
+
   const [username, setUsername] = useState("");
   const getUserName = async () => {
     if (localStorage.getItem("username") === null) {
