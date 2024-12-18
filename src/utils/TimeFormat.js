@@ -54,9 +54,9 @@ export function getFormattedDate(date) {
     let year = date.getFullYear();
 
     var res = "";
-    res += day > 10 ? day : "0" + day;
+    res += day >= 10 ? day : "0" + day;
     res += "/";
-    res += month > 10 ? month : "0" + month;
+    res += month >= 10 ? month : "0" + month;
     res += "/" + year;
     return res;
 }

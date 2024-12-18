@@ -56,43 +56,43 @@ function Header() {
     <>
       <header className="flex items-center justify-between max-w-6xl m-auto pt-4 px-2 ">
         <div
-          className="cursor-pointer h-[4rem] flex items-center justify-center"
+          className="cursor-pointer h-[4rem] flex items-center justify-center max-sm:h-[2.5rem]"
           onClick={handleImageClick}
         >
           <img className="h-full" src={logo}></img>
         </div>
         <nav
           className="text-xl max-lg:hidden"
-          onMouseEnter={() => setIsMenuOpen(true)}
+          // onMouseEnter={() => setIsMenuOpen(true)}
         >
           <ul className="flex font-bold">
             <li
               className="p-4 hover:text-theme-primary cursor-pointer"
-              onMouseEnter={() => {
-                setIsMenuOpen(true);
-                setMenuType("explore");
-                setIsProfileMenuOpen(false);
-              }}
+              // onMouseEnter={() => {
+              //   setIsMenuOpen(true);
+              //   setMenuType("explore");
+              //   setIsProfileMenuOpen(false);
+              // }}
             >
               <Link to="/explore">Explore</Link>
             </li>
             <li
               className="p-4 hover:text-theme-primary cursor-pointer"
-              onMouseEnter={() => {
-                setIsMenuOpen(true);
-                setMenuType("info");
-                setIsProfileMenuOpen(false);
-              }}
+              // onMouseEnter={() => {
+              //   setIsMenuOpen(true);
+              //   setMenuType("info");
+              //   setIsProfileMenuOpen(false);
+              // }}
             >
               <Link to="/info">Travel Information</Link>
             </li>
             <li
               className="p-4 hover:text-theme-primary cursor-pointer"
-              onMouseEnter={() => {
-                setIsMenuOpen(true);
-                setMenuType("contact");
-                setIsProfileMenuOpen(false);
-              }}
+              // onMouseEnter={() => {
+              //   setIsMenuOpen(true);
+              //   setMenuType("contact");
+              //   setIsProfileMenuOpen(false);
+              // }}
             >
               <Link to="/news">News & Offers</Link>
             </li>
@@ -106,7 +106,7 @@ function Header() {
               onMouseEnter={() => {
                 setArrowDown(false);
                 setIsProfileMenuOpen(true);
-                setIsMenuOpen(false);
+                // setIsMenuOpen(false);
               }}
             >
               {username}{" "}
@@ -135,11 +135,11 @@ function Header() {
           <span className="border-2 border-theme-primary w-10"></span>
         </div>
       </header>
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <div onMouseLeave={() => setIsMenuOpen(false)}>
           <DropDownMenu type={menuType} />
         </div>
-      )}
+      )} */}
       {isVerticalMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden">
           <VerticalMenu

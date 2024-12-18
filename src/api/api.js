@@ -238,14 +238,14 @@ export const putUserProfile = async (data) => {
   }
 };
 
-export const fetchFilteredFlights = async (from, to, start, end) => {
+export const fetchFilteredFlights = async (data) => {
   try {
-    const data = {
-      departureCity: from,
-      arrivalCity: to,
-      departureTimeStart: start,
-      departureTimeEnd: end,
-    };
+    // const data = {
+    //   departureCity: from,
+    //   arrivalCity: to,
+    //   departureTimeStart: start,
+    //   departureTimeEnd: end,
+    // };
     const response = await apiClient.get("/api/customer/v1/flights/filter", {
       params: data,
     });

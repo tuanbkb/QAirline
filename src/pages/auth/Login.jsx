@@ -11,9 +11,9 @@ function Login() {
     //   navigate("/");
     // };
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [emailError, setEmailError] = useState("");
+    const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [loginError, setLoginError] = useState("");
 
@@ -21,12 +21,12 @@ function Login() {
 
     // TODO: Implement this motherfucker
     const handleLoginButtonClicked = async (e) => {
-        setEmailError("");
+        setUsernameError("");
         setPasswordError("");
         setLoginError("");
 
-        if (email.trim() === "" || password.trim() === "") {
-            setEmailError(email.trim() === "" ? "Email can't be blank" : "");
+        if (username.trim() === "" || password.trim() === "") {
+            setUsernameError(username.trim() === "" ? "Username can't be blank" : "");
             setPasswordError(
                 password.trim() === "" ? "Password can't be blank" : ""
             );
@@ -37,7 +37,7 @@ function Login() {
         // setLoginError("No user. Are you dumb?");
         setIsLoading(true);
         try {
-            const { results } = await loginApi(email, password);
+            const { results } = await loginApi(username, password);
             console.log("Logged in");
             console.log(`access token: ${results.jwtToken}`);
             localStorage.setItem("accessToken", results.jwtToken);
@@ -70,16 +70,16 @@ function Login() {
                         Login
                     </h2>
                     <div className="py-2 flex flex-col">
-                        <div className="py-2">Username or Email</div>
+                        <div className="py-2">Username</div>
                         <input
                             className="p-2 w-96 border-solid border-gray-500 border rounded-lg"
                             type="text"
-                            placeholder="Enter your username/email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         ></input>
                     </div>
-                    <span className="text-theme-error">{emailError}</span>
+                    <span className="text-theme-error">{usernameError}</span>
                     <div className="py-2 flex flex-col">
                         <div className="py-2">Password</div>
                         <input

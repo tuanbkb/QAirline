@@ -55,12 +55,14 @@ function SearchFlight() {
 
     const getFlights = async () => {
         setIsLoading(true);
-        const flightsList = await fetchFilteredFlights(
-            states.from.id,
-            states.to.id,
-            getStartOfDay(departDate),
-            getEndOfDay(departDate)
-        );
+        const flightsList = await fetchFilteredFlights({
+            departureCity: states.from.id,
+            destinationCity: states.to.id,
+            ...(states.depart !== "" && {
+                departureTimeStart: getStartOfDay(states.depart),
+                departureTimeEnd: getEndOfDay(states.depart),
+            }),
+        });
         setIsLoading(false);
         setFlights(flightsList);
     };
@@ -92,10 +94,10 @@ function SearchFlight() {
             setToError("Please choose a city");
             error = true;
         }
-        if (depart === "") {
-            setDepartError("Please choose a date");
-            error = true;
-        }
+        // if (depart === "") {
+        //     setDepartError("Please choose a date");
+        //     error = true;
+        // }
 
         if (error) return;
         setButtonClicked(true);
@@ -118,9 +120,9 @@ function SearchFlight() {
                 SEARCH RESULT
             </h1>
             <div className="h-10"></div>
-            <div className="border-2 shadow-md flex p-4 rounded-xl">
+            <div className="border-2 shadow-md flex p-4 rounded-xl max-sm:flex-col">
                 <div className="flex grow justify-center px-2">
-                    <div className="flex flex-col items-center ">
+                    <div className="flex flex-col items-center">
                         <h3 className="font-bold text-xl">{fromCityCode}</h3>
                         <h4 className="">{fromCityName}</h4>
                     </div>
@@ -130,13 +132,14 @@ function SearchFlight() {
                         <h4 className="">{toCityName}</h4>
                     </div>
                 </div>
-                <div className="border"></div>
-                <div className="flex grow justify-center px-2">
-                    <div className="flex flex-col items-center">
-                        <h3 className="font-bold text-xl">Depart</h3>
-                        <h4 className="">{formatDate(departDate)}</h4>
+                {departDate !== "" ? (
+                    <div className="flex grow justify-center px-2 border-l-2 max-sm:border-l-0 max-sm:border-t-2">
+                        <div className="flex flex-col items-center">
+                            <h3 className="font-bold text-xl">Depart</h3>
+                            <h4 className="">{formatDate(departDate)}</h4>
+                        </div>
                     </div>
-                </div>
+                ) : <></>}
             </div>
             <div className="absolute left-0 right-0">
                 <div className="w-full flex justify-center">
@@ -259,7 +262,9 @@ function SearchFlight() {
                     <FlightCard flight={flight}></FlightCard>
                 ))}
                 {!isLoading && flights.length === 0 && (
-                    <h2 className="font-bold text-theme-primary text-2xl text-center">Sorry, there's no flight available.</h2>
+                    <h2 className="font-bold text-theme-primary text-2xl text-center">
+                        Sorry, there's no flight available.
+                    </h2>
                 )}
             </div>
         </div>
