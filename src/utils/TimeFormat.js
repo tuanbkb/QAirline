@@ -1,9 +1,8 @@
 export function getCorrectJSTime(dateTimeStr) {
-    const [datePart, timePart] = dateTimeStr.split(" "); // Tách phần ngày và giờ
-    const [day, month, year] = datePart.split("/").map(Number); // Tách và chuyển đổi ngày, tháng, năm thành số
-    const [hours, minutes, seconds] = timePart.split(":").map(Number); // Tách và chuyển đổi giờ, phút, giây thành số
+    const [datePart, timePart] = dateTimeStr.split(" ");
+    const [day, month, year] = datePart.split("/").map(Number);
+    const [hours, minutes, seconds] = timePart.split(":").map(Number);
       
-    // Lưu ý: Tháng trong JavaScript là từ 0 (tháng 1 là 0)
     return new Date(year, month - 1, day, hours, minutes, seconds);
 }
 
@@ -25,7 +24,7 @@ export function calculateDuration(start, end) {
     const h = Math.floor(diff / 60);
     const min = diff - h * 60;
     var res = "";
-    res += h > 10 ? h : "0" + h;
+    res += h >= 10 ? h : "0" + h;
     res += ":";
     res += min < 10 ? "0" + min : min;
     return res;
@@ -40,9 +39,9 @@ export function formatDate(date) {
 
     var res = "";
     res += days[date.getDay()] + ", ";
-    res += day > 10 ? day : "0" + day;
+    res += day >= 10 ? day : "0" + day;
     res += "/";
-    res += month > 10 ? month : "0" + month;
+    res += month >= 10 ? month : "0" + month;
     res += "/" + year;
     return res;
 }
@@ -79,4 +78,11 @@ export function getEndOfDay(date) {
     if (!(date instanceof Date)) return "";
     date.setHours(23, 59, 59, 999);
     return convertToSendFormat(new Date(date));
+}
+
+export function calculateDelayedArrivalTime(depart, delayedDepart, arrive) {
+    if (!(depart instanceof Date) || !(delayedDepart instanceof Date) || !(arrive instanceof Date)) return "";
+    const plannedDuration = arrive - depart;
+    const delayedArrival = new Date(delayedDepart.getTime() + plannedDuration);
+    return delayedArrival;
 }

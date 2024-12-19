@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import ShoppingCartItem from "../components/ShoppingCart/ShoppingCardItem";
 import { useState } from "react";
-import { formatDate, getCorrectJSTime } from "../utils/TimeFormat";
+import { formatDate, formatTime, getCorrectJSTime, calculateDelayedArrivalTime } from "../utils/TimeFormat";
 
 function ShoppingCart() {
     const navigate = useNavigate();
@@ -15,70 +15,18 @@ function ShoppingCart() {
     const to = flight.destinationAirport.airportName;
     const fromCity = flight.originAirport.city.cityName;
     const toCity = flight.destinationAirport.city.cityName;
-    const departure = getCorrectJSTime(flight.departureTime);
-    const arrival = getCorrectJSTime(flight.arrivalTime);
+    const departure = getCorrectJSTime(
+            flight.delayed ? flight.delayedDepartureTime : flight.departureTime
+        );
+        const arrival = flight.delayed
+            ? calculateDelayedArrivalTime(
+                  getCorrectJSTime(flight.departureTime),
+                  getCorrectJSTime(flight.delayedDepartureTime),
+                  getCorrectJSTime(flight.arrivalTime)
+              )
+            : getCorrectJSTime(flight.arrivalTime);
     const economyPrice = flight.economyPrice;
     const businessPrice = flight.businessPrice;
-
-    // function calculateTotalPrice(priceList) {
-    //     var cal = 0;
-    //     priceList.forEach(price => {
-    //         cal += price;
-    //     });
-
-    //     return cal;
-    // }
-
-    // const [flights, setFlights] = useState([
-    //     {
-    //         id: "flight_1",
-    //         start_airport: {
-    //             id: "airport_1",
-    //             name: "airport_name_1",
-    //             city: "The airport's city",
-    //             country: "The airport's country",
-    //             location: "1, A Street, A District, A City, A Country",
-    //         },
-    //         end_airport: {
-    //             id: "airport_2",
-    //             name: "airport_name_2",
-    //             city: "The airport's city",
-    //             country: "The airport's country",
-    //             location: "5, B Street, B District, B City, B Country",
-    //         },
-    //         start_time: "2024-10-30T12:00:00Z",
-    //         end_time: "2024-10-30T14:00:00Z",
-    //         is_available: "true",
-    //         capacity: 100,
-    //         remaining: 99,
-    //         normal_price: 100,
-    //         business_price: 200,
-    //     },
-    //     {
-    //         id: "flight_2",
-    //         start_airport: {
-    //             id: "airport_1",
-    //             name: "airport_name_1",
-    //             city: "The airport's city",
-    //             country: "The airport's country",
-    //             location: "1, A Street, A District, A City, A Country",
-    //         },
-    //         end_airport: {
-    //             id: "airport_2",
-    //             name: "airport_name_2",
-    //             city: "The airport's city",
-    //             country: "The airport's country",
-    //             location: "5, B Street, B District, B City, B Country",
-    //         },
-    //         start_time: "2024-10-30T12:00:00Z",
-    //         end_time: "2024-10-30T14:00:00Z",
-    //         is_available: "true",
-    //         capacity: 100,
-    //         remaining: 99,
-    //         normal_price: 100,
-    //         business_price: 200,
-    //     },
-    // ]);
 
     const handleButtonClicked = () => {
         navigate("/filldetails", {
@@ -122,11 +70,11 @@ function ShoppingCart() {
                 <div className="p-2 grow">
                     <p>
                         <strong>Departure Time: </strong>
-                        {formatDate(departure)}
+                        {formatDate(departure) + ", " + formatTime(departure)}
                     </p>
                     <p>
                         <strong>Arrival Time: </strong>
-                        {formatDate(arrival)}
+                        {formatDate(arrival) + ", " + formatTime(arrival)}
                     </p>
                     <p>
                         <em>Plane: </em>

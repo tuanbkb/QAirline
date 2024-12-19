@@ -5,14 +5,23 @@ import {
     getFormattedDate,
     formatDate,
     getCorrectJSTime,
+    calculateDelayedArrivalTime,
 } from "../../utils/TimeFormat";
 import PlaneIcon from "../PlaneIcon";
 
 function FlightCard({ flight }) {
     const from = flight.originAirport.airportName;
     const to = flight.destinationAirport.airportName;
-    const departure = getCorrectJSTime(flight.departureTime);
-    const arrival = getCorrectJSTime(flight.arrivalTime);
+    const departure = getCorrectJSTime(
+        flight.delayed ? flight.delayedDepartureTime : flight.departureTime
+    );
+    const arrival = flight.delayed
+        ? calculateDelayedArrivalTime(
+              getCorrectJSTime(flight.departureTime),
+              getCorrectJSTime(flight.delayedDepartureTime),
+              getCorrectJSTime(flight.arrivalTime)
+          )
+        : getCorrectJSTime(flight.arrivalTime);
     const economyPrice = flight.economyPrice;
     const businessPrice = flight.businessPrice;
     const availableEconomySeats = flight.availableEconomySeats;

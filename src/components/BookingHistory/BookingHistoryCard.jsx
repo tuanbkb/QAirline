@@ -2,6 +2,7 @@ import {
     formatDate,
     formatTime,
     getCorrectJSTime,
+    calculateDelayedArrivalTime
 } from "../../utils/TimeFormat";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,14 +21,26 @@ function BookingHistoryCard({
     const flight = ticket.flight;
     const fromCity = flight.originAirport.city.cityName;
     const toCity = flight.destinationAirport.city.cityName;
-    const departure =
-        formatDate(getCorrectJSTime(flight.departureTime)) +
-        ", " +
-        formatTime(getCorrectJSTime(flight.departureTime));
-    const arrival =
-        formatDate(getCorrectJSTime(flight.arrivalTime)) +
-        ", " +
-        formatTime(getCorrectJSTime(flight.arrivalTime));
+    // const departure =
+    //     formatDate(getCorrectJSTime(flight.departureTime)) +
+    //     ", " +
+    //     formatTime(getCorrectJSTime(flight.departureTime));
+    // const arrival =
+    //     formatDate(getCorrectJSTime(flight.arrivalTime)) +
+    //     ", " +
+    //     formatTime(getCorrectJSTime(flight.arrivalTime));
+    const departureTime = getCorrectJSTime(
+        flight.delayed ? flight.delayedDepartureTime : flight.departureTime
+    );
+    const arrivalTime = flight.delayed
+        ? calculateDelayedArrivalTime(
+              getCorrectJSTime(flight.departureTime),
+              getCorrectJSTime(flight.delayedDepartureTime),
+              getCorrectJSTime(flight.arrivalTime)
+          )
+        : getCorrectJSTime(flight.arrivalTime);
+    const departure = formatDate(departureTime) + ", " + formatTime(departureTime);
+    const arrival = formatDate(arrivalTime) + ", " + formatTime(arrivalTime);
     const flightNumber = flight.flightNumber;
     const seat = ticket.seat;
     const seatType = ticket.seatType;
