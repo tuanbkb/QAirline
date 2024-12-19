@@ -135,7 +135,10 @@ function Home() {
                   Recommended destinations
                 </div>
                 <Carousel
+                  autoPlay={true}
                   ssr={true}
+                  autoPlaySpeed={5000}
+                  infinite={true}
                   responsive={responsive}
                   className="max-w-6xl m-auto"
                 >
@@ -161,6 +164,9 @@ function Home() {
                   </div>
                 ) : (
                   <Carousel
+                    autoPlay={true}
+                    autoPlaySpeed={3000}
+                    infinite={true}
                     ssr={true}
                     responsive={responsive}
                     className="max-w-6xl m-auto"

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import RectangleCard from "../../components/RectangleCard";
-import backgroundImage from "../../assets/image/backgroundLowOpacity.png";
 
 export default function InformationPage() {
   const navigate = useNavigate();
@@ -22,32 +21,23 @@ export default function InformationPage() {
     },
   ];
   return (
-    <div
-      style={{
-        background: `url(${backgroundImage})`,
-        paddingTop: 5,
-      }}
-    >
-      <div className="max-w-6xl m-auto">
-        <h1 className="mt-4 text-3xl text-theme-primary text-center font-bold">
-          TRAVEL INFORMATION
-        </h1>
-        <div className="grid grid-cols-2 gap-5 mt-5">
-          {folderList.map((folder) => (
-            <RectangleCard
-              key={folder.name}
-              imageUrl={folder.imgUrl}
-              name={folder.name}
-              onCardClick={() => {
-                navigate(
-                  `/info/${folder.name.replace(" ", "-").toLowerCase()}`
-                );
-              }}
-            />
-          ))}
-        </div>
-        <div className="h-10"></div>
+    <div className="max-w-6xl m-auto">
+      <h1 className="mt-4 text-3xl text-theme-primary text-center font-bold">
+        TRAVEL INFORMATION
+      </h1>
+      <div className="grid grid-cols-2 gap-5 mt-5">
+        {folderList.map((folder) => (
+          <RectangleCard
+            key={folder.name}
+            imageUrl={folder.imgUrl}
+            name={folder.name}
+            onCardClick={() => {
+              navigate(`/info/${folder.name.replace(" ", "-").toLowerCase()}`);
+            }}
+          />
+        ))}
       </div>
+      <div className="h-10"></div>
     </div>
   );
 }

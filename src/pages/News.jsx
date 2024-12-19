@@ -7,8 +7,6 @@ import RectangleCard from "../components/RectangleCard";
 import { useSelector, useDispatch } from "react-redux";
 import { newsFetched } from "../redux/newsSlice";
 import { selectNewsByClassification } from "../redux/newsSelector";
-import backgroundImage from "../assets/image/backgroundLowOpacity.png";
-import Carousel from "react-multi-carousel";
 
 const NewsPage = () => {
   // const newsList = useSelector((state) => state.news);
@@ -52,12 +50,7 @@ const NewsPage = () => {
   };
 
   return (
-    <div
-      className="flex h-full justify-center"
-      style={{
-        background: `url(${backgroundImage})`,
-      }}
-    >
+    <div className="flex h-full justify-center">
       <div className="max-w-6xl">
         <h1 className="mt-4 text-3xl text-theme-primary font-bold text-center">
           NEWS & OFFERS
