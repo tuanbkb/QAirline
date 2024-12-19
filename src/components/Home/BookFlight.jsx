@@ -43,7 +43,7 @@ function BookFlight() {
       error = true;
     }
     if (from === "") {
-      setBookingError("Destination city can't be blank");
+      setBookingError("Departure city can't be blank");
       error = true;
     }
 
