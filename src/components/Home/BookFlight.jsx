@@ -51,7 +51,7 @@ function BookFlight() {
   };
 
   return (
-    <div className="max-w-4xl m-auto">
+    <div className="max-w-4xl m-auto z-20">
       <div className="shadow-md bg-theme-primary rounded-xl border">
         <h2 className="font-bold text-white text-xl text-center p-3">
           Search flight

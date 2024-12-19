@@ -3,14 +3,14 @@ export default function RectangleCard({ imageUrl, name, onCardClick }) {
     <div
       key={name}
       onClick={onCardClick}
-      className="relative cursor-pointer rounded-md overflow-hidden group"
+      className="relative cursor-pointer rounded-md overflow-hidden group shadow-md"
     >
       <img
         src={imageUrl}
         className="h-[250px] w-full object-cover rounded-md transition-transform duration-300 ease-in-out group-hover:scale-110"
       />
-      <div className="bg-[#ECDCFF]/90 absolute w-[100%] p-5 bottom-0 rounded-b-md flex justify-between items-center">
-        <h2 className="font-bold text-white text-xl opacity-100">{name}</h2>
+      <div className="bg-[#ECDCFF]/95 absolute w-[100%] p-5 bottom-0 rounded-b-md flex justify-between items-center">
+        <h2 className="font-bold text-[#230f42] text-xl opacity-100">{name}</h2>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

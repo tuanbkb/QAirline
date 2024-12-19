@@ -23,11 +23,30 @@ import { useState } from "react";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { CircularProgress } from "@mui/material";
+import { getAllNews } from "../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { newsFetched } from "../redux/newsSlice";
+import backgroundImage from "../assets/image/background.jpg";
+import { useMediaQuery } from "react-responsive";
+import { selectNewsByClassification } from "../redux/newsSelector";
 
 function Home() {
   const location = useLocation();
   const [destinationList, setDestinationList] = useState([]);
+  const newsList = useSelector((state) => state.news);
+  const filteredNewsList = useSelector((state) =>
+    selectNewsByClassification(state, ["NEWS", "OFFER"])
+  );
+  const [loadingNews, setLoadingNews] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isMobile = useMediaQuery({ query: "(max-width: 400px)" });
+
+  const fetchNews = async () => {
+    const response = await getAllNews();
+    dispatch(newsFetched(response.results));
+  };
 
   const fetchDestinations = async () => {
     const res = await axios.get("/destinationsData.json");
@@ -35,7 +54,12 @@ function Home() {
   };
 
   useEffect(() => {
+    if (filteredNewsList.length === 0) setLoadingNews(true);
+    fetchNews().then((res) => {
+      setLoadingNews(false);
+    });
     fetchDestinations();
+
     const routeTitles = {
       "/explore": "Explore",
       "/explore/:destinationId": "Destination Details",
@@ -86,14 +110,27 @@ function Home() {
     <div className="min-h-screen">
       <Header />
       <div className="h-5"></div>
-      <div className="px-2 min-h-[calc(100vh-256px)]">
+      <div className="min-h-[calc(100vh-256px)]">
         <Routes>
           <Route
             path="/"
             element={
               <div className="m-auto">
-                <div className="h-5"></div>
-                <BookFlight />
+                {!isMobile ? (
+                  <div
+                    className="relative h-[450px] bg-cover"
+                    style={{
+                      backgroundImage: `url(${backgroundImage})`,
+                    }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <BookFlight />
+                    </div>
+                  </div>
+                ) : (
+                  <BookFlight />
+                )}
+
                 <div className="m-auto text-center my-5 text-3xl font-bold text-theme-primary">
                   Recommended destinations
                 </div>
@@ -114,6 +151,36 @@ function Home() {
                     );
                   })}
                 </Carousel>
+                <div className="m-auto text-center my-5 text-3xl font-bold text-theme-primary">
+                  Airline news
+                </div>
+                {loadingNews ? (
+                  <div className="flex justify-center items-center gap-2">
+                    <CircularProgress color="#69548D" />
+                    <div className="text-gray-600 text-lg">Loading...</div>
+                  </div>
+                ) : (
+                  <Carousel
+                    ssr={true}
+                    responsive={responsive}
+                    className="max-w-6xl m-auto"
+                  >
+                    {filteredNewsList.map((news, index) => {
+                      return (
+                        <div className="mr-5" key={index}>
+                          <RectangleCard
+                            key={news.id}
+                            name={news.title}
+                            imageUrl={news.imageUrl}
+                            onCardClick={() => {
+                              navigate(`/news/${index}`, { state: news });
+                            }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </Carousel>
+                )}
               </div>
             }
           />
