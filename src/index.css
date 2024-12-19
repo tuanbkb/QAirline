@@ -5,25 +5,25 @@
 /* Custom calendar styles */
 
 .custom-calendar .react-calendar__navigation {
-    @apply flex justify-center items-center gap-2;
+  @apply flex justify-center items-center gap-2;
 }
 
 .custom-calendar .react-calendar__navigation button {
-    @apply font-bold rounded px-3 py-2 hover:bg-theme-primaryContainer;
+  @apply font-bold rounded px-3 py-2 hover:bg-theme-primaryContainer;
 }
 
 .custom-calendar .react-calendar__tile {
-    @apply w-12 h-12 rounded-xl;
+  @apply w-12 h-12 rounded-xl;
 }
 
 .custom-calendar .react-calendar__tile--active {
-    @apply bg-theme-primary text-white;
+  @apply bg-theme-primary text-white;
 }
 
 .custom-calendar .react-calendar__tile:hover {
-    @apply bg-theme-primaryContainer;
+  @apply bg-theme-primaryContainer;
 }
 
 .custom-calendar .react-calendar__month-view__weekdays__weekday {
-    @apply flex justify-center items-center text-sm font-semibold;
+  @apply flex justify-center items-center text-sm font-semibold;
 }

@@ -30,6 +30,7 @@ import { newsFetched } from "../redux/newsSlice";
 import backgroundImage from "../assets/image/background.jpg";
 import { useMediaQuery } from "react-responsive";
 import { selectNewsByClassification } from "../redux/newsSelector";
+import "./home.css";
 
 function Home() {
   const location = useLocation();
@@ -118,12 +119,12 @@ function Home() {
               <div className="m-auto">
                 {!isMobile ? (
                   <div
-                    className="relative h-[450px] bg-cover"
+                    className="relative h-[450px] bg-cover flex items-center"
                     style={{
                       backgroundImage: `url(${backgroundImage})`,
                     }}
                   >
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-[100%]">
                       <BookFlight />
                     </div>
                   </div>
