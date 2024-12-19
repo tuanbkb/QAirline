@@ -123,7 +123,7 @@ function Home() {
                       backgroundImage: `url(${backgroundImage})`,
                     }}
                   >
-                    <div className="w-[100%] px-5">
+                    <div className="w-[100%] px-2">
                       <BookFlight />
                     </div>
                   </div>
