@@ -30,7 +30,6 @@ import { newsFetched } from "../redux/newsSlice";
 import backgroundImage from "../assets/image/background.jpg";
 import { useMediaQuery } from "react-responsive";
 import { selectNewsByClassification } from "../redux/newsSelector";
-import "./home.css";
 
 function Home() {
   const location = useLocation();
