@@ -110,7 +110,7 @@ function Home() {
     <div className="min-h-screen">
       <Header />
       <div className="h-5"></div>
-      <div className="min-h-[calc(100vh-256px)]">
+      <div className="px-2 min-h-[calc(100vh-256px)]">
         <Routes>
           <Route
             path="/"
@@ -123,7 +123,7 @@ function Home() {
                       backgroundImage: `url(${backgroundImage})`,
                     }}
                   >
-                    <div className="w-[100%]">
+                    <div className="w-[100%] px-5">
                       <BookFlight />
                     </div>
                   </div>
