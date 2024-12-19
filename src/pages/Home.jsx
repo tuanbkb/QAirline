@@ -140,11 +140,12 @@ function Home() {
                   autoPlaySpeed={5000}
                   infinite={true}
                   responsive={responsive}
+                  partialVisible={false}
                   className="max-w-6xl m-auto"
                 >
                   {destinationList.map((destination, index) => {
                     return (
-                      <div className="mr-5" key={index}>
+                      <div className="px-2" key={index}>
                         <RectangleCard
                           imageUrl={destination.image}
                           name={destination["province/state"]}
@@ -168,12 +169,13 @@ function Home() {
                     autoPlaySpeed={3000}
                     infinite={true}
                     ssr={true}
+                    partialVisible={false}
                     responsive={responsive}
                     className="max-w-6xl m-auto"
                   >
                     {filteredNewsList.map((news, index) => {
                       return (
-                        <div className="mr-5" key={index}>
+                        <div className="px-2" key={index}>
                           <RectangleCard
                             key={news.id}
                             name={news.title}
